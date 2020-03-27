@@ -1,0 +1,20 @@
+{
+  "name": "aprog-remake",
+  "version": "1.0.0",
+  "description": "re:make WebApp",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilsLab/aprog-remake.git"
+  },
+  "author": "Jonas Sternberg, Mouna Weitz, Philipp Molitor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhilsLab/aprog-remake/issues"
+  },
+  "homepage": "https://github.com/PhilsLab/aprog-remake#readme"
+}
