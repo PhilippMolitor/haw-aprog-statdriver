@@ -1,4 +1,6 @@
 const r = require('express').Router();
+
+// route controllers
 const loginController = require('./controllers/login');
 
 // base redirect
