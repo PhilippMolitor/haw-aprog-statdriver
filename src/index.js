@@ -6,13 +6,24 @@ const path = require('path');
 const morgan = require('morgan');
 const config = require('./config');
 const router = require('./router');
+const { databaseMiddleware } = require('./middlewares/database');
+const { runDatabaseSeeder, checkDatabasePresent } = require('./seeder');
 
 // instances
 const app = express();
 
+// seed database if not present
+if (!checkDatabasePresent()) {
+    console.warn('database not seeded, running seeder...');
+    runDatabaseSeeder();
+}
+
 // add middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
+
+// add custom middlewares
+app.use(databaseMiddleware());
 
 // express settings
 app.engine('ejs', ejs.__express);
@@ -25,5 +36,6 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // run the server
 app.listen(config.port, () => {
+    console.debug('application environment: ' + (config.isProduction ? '' : 'not ') + 'production');
     console.info('server is listening on port ' + config.port);
 });
