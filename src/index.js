@@ -4,9 +4,11 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const path = require('path');
 const morgan = require('morgan');
+const expressSession = require('express-session');
 const config = require('./config');
 const router = require('./router');
 const { databaseMiddleware } = require('./middlewares/database');
+const { authenticationMiddleware } = require('./middlewares/authentication');
 const { runDatabaseSeeder, checkDatabasePresent } = require('./seeder');
 
 // instances
@@ -18,17 +20,31 @@ if (!checkDatabasePresent()) {
     runDatabaseSeeder();
 }
 
-// add middlewares
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('tiny'));
-
-// add custom middlewares
-app.use(databaseMiddleware());
-
 // express settings
 app.engine('ejs', ejs.__express);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/templates'));
+
+// add middlewares
+app.use(bodyParser.urlencoded({ extended: true }));
+// noinspection JSCheckFunctionSignatures
+app.use(morgan('tiny'));
+// noinspection JSCheckFunctionSignatures
+app.use(expressSession({
+    name: 'statdriver-login',
+    secret: config.cookieSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: config.isProduction,
+        sameSite: config.isProduction ? true : 'none'
+    },
+    proxy: config.isProduction
+}));
+
+// add custom middlewares
+app.use(databaseMiddleware());
+app.use(authenticationMiddleware());
 
 // attach router
 app.use('/', router);
