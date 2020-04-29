@@ -2,21 +2,17 @@
   "name": "aprog-statdriver",
   "version": "1.0.0",
   "description": "StatDriver WebApp",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Jonas Sternberg, Mouna Weitz, Philipp Molitor, Oskar Zajac",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/PhilsLab/aprog-statdriver#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PhilsLab/aprog-remake.git"
+    "url": "git+https://github.com/PhilsLab/aprog-statdriver.git"
   },
-  "author": "Jonas Sternberg, Mouna Weitz, Philipp Molitor",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/PhilsLab/aprog-remake/issues"
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
   },
-  "homepage": "https://github.com/PhilsLab/aprog-remake#readme",
   "dependencies": {
     "better-sqlite3": "^7.0.1",
     "body-parser": "^1.19.0",
