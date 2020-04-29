@@ -17,9 +17,14 @@ r.get('/', (req, res) => {
 });
 
 // dashboard new game form (get)
-
+r.get('/new-game', (req, res) => {
+    res.render('new-game.ejs');
+});
 
 // dashboard new game handler (post)
-
+r.post('/new-game', (req, res) => {
+    // gameName -> games
+    res.redirect('/dashboard');
+});
 
 module.exports = r;

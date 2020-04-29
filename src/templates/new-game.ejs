@@ -5,17 +5,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>New Game</title>
 </head>
 <body>
 <p>
-    <% for(let g of games) { %>
-        <%= g.name %><br>
-        ID: <%= g.id %><br>
-    <% } %>
-</p>
-<p>
-    <a href = '/dashboard/new-game'>add Game</a>
+
+    <form>
+        Name: <br>
+    <input gameName><br>
+        <button formmethod = "post"> submit </button>
+    </form>
+    <a href = '/dashboard'>back</a>
+
 </p>
 </body>
 </html>
