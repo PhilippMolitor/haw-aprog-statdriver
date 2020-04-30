@@ -27,6 +27,7 @@ app.set('views', path.join(__dirname, '/templates'));
 
 // add middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // noinspection JSCheckFunctionSignatures
 app.use(morgan('tiny'));
 // noinspection JSCheckFunctionSignatures
