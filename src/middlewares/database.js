@@ -4,12 +4,12 @@ const path = require('path');
 const config = require('../config');
 
 // database file path
-const databaseFile = path.join(config.dataPath, 'statdriver.sqlite3');
+const databaseFile = path.join(config.dataPath, 'statdriver.db');
 
 // instances
 const database = betterSqlite3(databaseFile, {
     verbose: message => {
-        if (!config.isProduction) console.debug('> Database query: ' + message);
+        if (!config.isProduction) console.debug('[debug] database query: ' + message);
     }
 });
 
