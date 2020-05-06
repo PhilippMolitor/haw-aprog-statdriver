@@ -1,7 +1,7 @@
 const r = require('express').Router();
 
 // route controllers
-const loginController = require('./controllers/login');
+const authController = require('./controllers/auth');
 const dashboardController = require('./controllers/dashboard');
 
 // base redirect
@@ -11,7 +11,7 @@ r.get('/', (req, res) => {
 });
 
 // controllers
-r.use('/login', loginController);
+r.use('/auth', authController);
 r.use('/dashboard', dashboardController);
 
 module.exports = r;
