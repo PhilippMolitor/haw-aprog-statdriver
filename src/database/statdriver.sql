@@ -9,7 +9,7 @@ CREATE TABLE "entries"
     "scoreboard_id" INTEGER NOT NULL,
     "player_name"   TEXT    NOT NULL,
     "score"         integer NOT NULL,
-    "date"          DATE    NOT NULL DEFAULT (datetime('now', 'localtime')),
+    "date"          DATE    NOT NULL DEFAULT (strftime('%s', 'now')),
     CONSTRAINT "entries_scoreboard_id__scoreboards_scoreboard_id" FOREIGN KEY ("scoreboard_id") REFERENCES "scoreboards" ("scoreboard_id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
