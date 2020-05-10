@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="statdriver" uuid="9fdd05eb-2754-4780-a707-e579d58bb668">
+    <data-source source="LOCAL" name="statdriver.db" uuid="0a5ebc72-14d7-44f9-91e5-8491e5303df5">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\Projects\aprog-remake\data\statdriver.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/data/statdriver.db</jdbc-url>
     </data-source>
   </component>
 </project>

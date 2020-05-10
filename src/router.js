@@ -3,6 +3,7 @@ const r = require('express').Router();
 // route controllers
 const authController = require('./controllers/auth');
 const dashboardController = require('./controllers/dashboard');
+const embedController = require('./controllers/embed');
 const apiController = require('./controllers/api');
 
 // base redirect
@@ -14,6 +15,7 @@ r.get('/', (req, res) => {
 // controllers
 r.use('/auth', authController);
 r.use('/dashboard', dashboardController);
+r.use('/embed', embedController);
 r.use('/api', apiController);
 
 module.exports = r;
