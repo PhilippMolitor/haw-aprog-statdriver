@@ -1,0 +1,81 @@
+
+body {
+    background: #1A203E;
+}
+
+.textinput1 {
+    background: #0D1333;
+    border-radius: 5px;
+    border-color: #E5E5E5;
+    position: absolute;
+    right: 0px;
+    margin-right: 100px;
+    margin-top: 30px;
+    height: 30px;
+    width: 35em;
+    text-align: left;
+    color: gray;
+    font-family: Avenir;
+    font-size: 13pt;
+}
+.textinput2 {
+    background: #0D1333;
+    border-radius: 5px;
+    border-color: #E5E5E5;
+    position: absolute;
+    right: 0px;
+    margin-right: 100px;
+    margin-top: 70px;
+    height: 30px;
+    width: 35em;
+    text-align: left;
+    color: gray;
+    font-family: Avenir;
+    font-size: 13pt;
+}
+.submitbutton {
+    background: #5AA8A3;
+    border-color: #5AA8A3;
+    border-radius: 5px;
+    position: absolute;
+    right: 0px;
+    margin-right: 100px;
+    margin-top: 110px;
+    height: 30px;
+    width: 10em;
+    font-family: 'press_start_2pregular';
+    font-size: 17pt;
+    color: #E5E5E5;
+}
+
+#rect {
+    background: #0D1333;
+    opacity: 0.8;
+    backdrop-filter: blur(40px);
+    position: relative;
+    border-radius: 6px;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 150px;
+    height: 550px;
+}
+#logo {
+    font-family: 'press_start_2pregular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 50px;
+    color: #5AA8A3;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-bottom: 30px;
+}
+#information {
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 20px;
+    color: #E5E5E5;
+    padding-left: 40px;
+}
