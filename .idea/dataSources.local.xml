@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-<<<<<<< Updated upstream
     <data-source name="statdriver" uuid="9fdd05eb-2754-4780-a707-e579d58bb668">
       <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1" exact-driver-version="3.25">
         <identifier-quote-string>&quot;</identifier-quote-string>
@@ -13,11 +12,6 @@
           <node kind="schema" qname="@" />
         </introspection-scope>
       </schema-mapping>
-=======
-    <data-source name="statdriver.db" uuid="0a5ebc72-14d7-44f9-91e5-8491e5303df5">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
-      <schema-mapping />
->>>>>>> Stashed changes
     </data-source>
   </component>
 </project>
