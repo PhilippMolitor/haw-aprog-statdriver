@@ -89,4 +89,11 @@ r.post('/signup', (req, res) => {
     }
 });
 
+r.get('/auth/logout', (req, res) => {
+    // end session
+
+    // redirect to login-page
+    res.redirect('/auth/login');
+});
+
 module.exports = r;

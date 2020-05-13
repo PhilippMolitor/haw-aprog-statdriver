@@ -18,6 +18,7 @@ r.get('/', (req, res) => {
 // controllers
 r.use('/auth', authController);
 r.use('/dashboard', requiresLogin(), dashboardController);
+r.use('/logout', authController);
 r.use('/embed', embedController);
 r.use('/api', apiController);
 
