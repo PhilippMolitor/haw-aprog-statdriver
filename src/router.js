@@ -6,6 +6,7 @@ const { requiresLogin } = require('./middlewares/authentication');
 // route controllers
 const authController = require('./controllers/auth');
 const dashboardController = require('./controllers/dashboard');
+const scoreboardController = require('./controllers/scoreboard');
 const embedController = require('./controllers/embed');
 const apiController = require('./controllers/api');
 
@@ -18,6 +19,7 @@ r.get('/', (req, res) => {
 // controllers
 r.use('/auth', authController);
 r.use('/dashboard', requiresLogin(), dashboardController);
+r.use('/scoreboard', requiresLogin(), scoreboardController);
 r.use('/embed', embedController);
 r.use('/api', apiController);
 
