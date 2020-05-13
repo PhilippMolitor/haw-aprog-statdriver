@@ -8,6 +8,20 @@
     <title>Login - StatDriver</title>
 </head>
 <body>
+<form method="post">
+    Username (only lowercase, numbers, and _ .): <br>
+    <input type="text" name="name" pattern="[a-z][a-z0-9_.]{2,31}" value="<%= name %>" required><br>
+    Password: <br>
+    <input type="password" name="password" required><br>
+    <input type="submit" value="login">
+</form>
+<p style="color: red; font-weight: 700;">
+    <% if (error == 1) { %>
+        Password incorrect!
+    <% } else if (error == 2) { %>
+        User not found!
+    <% } %>
+</p>
 
 </body>
 </html>

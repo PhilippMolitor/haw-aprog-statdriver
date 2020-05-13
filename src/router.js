@@ -1,5 +1,8 @@
 const r = require('express').Router();
 
+// middleware for authentication
+const { requiresLogin } = require('./middlewares/authentication');
+
 // route controllers
 const authController = require('./controllers/auth');
 const dashboardController = require('./controllers/dashboard');
@@ -15,8 +18,8 @@ r.get('/', (req, res) => {
 
 // controllers
 r.use('/auth', authController);
-r.use('/dashboard', dashboardController);
-r.use('/scoreboard', scoreboardController);
+r.use('/dashboard', requiresLogin(), dashboardController);
+r.use('/scoreboard', requiresLogin(), scoreboardController);
 r.use('/embed', embedController);
 r.use('/api', apiController);
 
