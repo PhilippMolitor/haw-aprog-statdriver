@@ -1,5 +1,8 @@
 const r = require('express').Router();
 
+// middleware for authentication
+const { requiresLogin } = require('./middlewares/authentication');
+
 // route controllers
 const authController = require('./controllers/auth');
 const dashboardController = require('./controllers/dashboard');
@@ -12,6 +15,6 @@ r.get('/', (req, res) => {
 
 // controllers
 r.use('/auth', authController);
-r.use('/dashboard', dashboardController);
+r.use('/dashboard', requiresLogin(), dashboardController);
 
 module.exports = r;

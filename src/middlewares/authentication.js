@@ -17,7 +17,7 @@ function authenticationMiddleware () {
 function requiresLogin () {
     return (req, res, next) => {
         if (!req.session.userId) {
-            res.redirect('/login?from=' + req.originalUrl);
+            res.redirect('/auth/login?from=' + req.originalUrl);
         } else {
             next();
         }
