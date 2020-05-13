@@ -12,8 +12,11 @@ const apiController = require('./controllers/api');
 
 // base redirect
 r.get('/', (req, res) => {
-    // TODO: check for authentication, and redirect accordingly
-    res.redirect('/login');
+    if (req.authentication.getUserId()) {
+        res.redirect('/dashboard')
+    } else {
+        res.redirect('/auth/login');
+    }
 });
 
 // controllers
