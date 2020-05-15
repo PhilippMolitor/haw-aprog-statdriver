@@ -7,7 +7,7 @@ A highscore hosting web application made for the "Angewandte Programmierung" cou
 
 StatDriver enables game developers to host their own Scoreboards. All you need is a StatDriver account - you can create several scoreboards for your game and use the simple REST API inside your game's code to send and receive highscore entries to and from StatDriver.
 
-If don't want to design your own scoreboards, StatDriver also provides pre-themed HTML embeds for your website or custom web view, which you can enable and disable for public access at any time.
+If you don't want to design your own scoreboards, StatDriver also provides pre-themed HTML embeds for your website or custom web view, which you can enable and disable for public access at any time.
 
 
 ## Getting up and running
