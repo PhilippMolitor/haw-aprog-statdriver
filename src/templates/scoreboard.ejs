@@ -20,5 +20,32 @@
 <pre>
 <%= JSON.stringify(entries, null, 2) %>
 </pre>
+<table>
+    <thead>
+    <tr>
+        <td>rank</td>
+        <td>player</td>
+        <td>score</td>
+        <td>time of record</td>
+        <td>actions</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% let rank = 1; for (let e of entries) { %>
+        <tr>
+            <td><%= rank %></td>
+            <td><%= e.name %></td>
+            <td><%= e.score %></td>
+            <td><%= new Date(e.timestamp * 1000).toLocaleString('de-DE') %></td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="deleteEntry" value="<%= e.id %>">
+                    <input type="submit" value="x">
+                </form>
+            </td>
+        </tr>
+    <% rank++; } %>
+    </tbody>
+</table>
 </body>
 </html>
