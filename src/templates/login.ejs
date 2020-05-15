@@ -6,18 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login - StatDriver</title>
-    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/login.css">
 </head>
 <body>
+    <div id="wrapperh">
+    <div class="space"></div>
     <div id="rect">
         <div id="logo">StatDriver</div>
-        <div id="information">was wir machen blablabla<br>weitere zeile blabla<br>noch eine zeile blabla</div><br>
+        <div id="information">StatDriver enables you to host your own Scoreboards.<br>
+         All you need is a StatDriver account.</div><br>
         <form method="post">
-            <input class="textinput1" type="text" name="name" placeholder="name" pattern="[a-z][a-z0-9_.]{2,31}" value="<%= name %>" required><br>
-            <input class="textinput2" type="password" name="password" placeholder="password" required><br>
+            <input class="ti foo" type="text" name="name" placeholder="name" pattern="[a-z][a-z0-9_.]{2,31}" value="<%= name %>" required><br>
+            <input class="ti bar" type="password" name="password" placeholder="password" required><br>
             <input class="submitbutton" type="submit" value="login">
-            
+
             <p style="color: red; font-weight: 700;">
                 <% if (error == 1) { %>
                     Password incorrect!
@@ -26,6 +29,8 @@
                 <% } %>
             </p>
         </form>
+    </div>
+    <div class="space"></div>
     </div>
 </body>
 </html>
