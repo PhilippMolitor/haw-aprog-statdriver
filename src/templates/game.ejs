@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game - StatDriver</title>
+</head>
+<body>
+<ul>
+    <a href="/game/<%= gameId %>/new-scoreboard">create new scoreboard</a>
+
+    <% for(s of scoreboards) { %>
+        <li>
+            <a href="/scoreboard/<%= s.scoreboardId %>"><%= s.name %></a>
+            <form method="post" action="/scoreboard/<%= s.scoreboardId %>">
+                <input type="submit" name="deleteScoreboard" value="delete">
+            </form>
+        </li>
+    <% } %>
+</ul>
+</body>
+</html>
