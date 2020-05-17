@@ -1,4 +1,5 @@
 const r = require('express').Router();
+const { randomKey } = require('../tools');
 
 r.get('/:gameId', (req, res) => {
     const { gameId } = req.params;
@@ -35,8 +36,8 @@ r.post('/:gameId/new-scoreboard', (req, res) => {
                   VALUES (@gameId, @scoreboardName, @setKey, @getKey, @embedTitle)`);
     const result = stmt.run({
         gameId, scoreboardName,
-        getKey: 'x', // TODO
-        setKey: 'y', // TODO
+        getKey: randomKey(16),
+        setKey: randomKey(16),
         embedTitle: scoreboardName,
     });
 
