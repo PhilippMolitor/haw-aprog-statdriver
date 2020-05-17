@@ -1,17 +1,12 @@
 const r = require('express').Router();
-
-// creates a new scoreboard
-r.post('/', (req, res) => {
-    const { gameId, scoreboardName } = req.body;
-
-});
+const { randomKey } = require('../tools');
 
 // shows a scoreboard
 r.get('/:scoreboardId', (req, res) => {
     const { scoreboardId } = req.params;
-    const { maxEntries, pastDays } = req.query;
+    const { maxEntries, pastDays, scoreNameFilter } = req.query;
 
-    // check for scoreboard
+    // check for scoreboard ownership
     const stmt = req.database
         .prepare(`SELECT s.name          as scoreboardName,
                          s.game_id       as gameId,
@@ -27,12 +22,13 @@ r.get('/:scoreboardId', (req, res) => {
     const result = stmt
         .get({
             id: scoreboardId,
-            owner: req.authentication.getUserId()
+            owner: req.authentication.getUserId(),
         });
 
     if (result) {
         const { scoreboardName, gameId, setKey, getKey, embedEnabled, embedTitle } = result;
-        
+        const pastDaysParsed = parseInt(pastDays) || 7;
+
         // game name
         const gameStmt = req.database
             .prepare(`SELECT name as gameName
@@ -40,7 +36,7 @@ r.get('/:scoreboardId', (req, res) => {
                       WHERE game_id = @id`);
         const { gameName } = gameStmt
             .get({
-                id: gameId
+                id: gameId,
             });
 
         // entries
@@ -51,11 +47,13 @@ r.get('/:scoreboardId', (req, res) => {
                              date        as timestamp
                       FROM entries
                       WHERE scoreboard_id = @id
+                        AND player_name LIKE ('%' || @scoreNameFilter || '%')
                       ORDER BY score DESC
                       LIMIT @max`);
         const entries = entryStmt.all({
             id: scoreboardId,
-            max: parseInt(maxEntries) || 10
+            max: parseInt(maxEntries) || 10,
+            scoreNameFilter: scoreNameFilter || '',
         });
 
         // limited stats
@@ -67,7 +65,7 @@ r.get('/:scoreboardId', (req, res) => {
                         AND date > @minTime`);
         const { timeScoreCount, timeScoreAverage } = statsLimitedStmt.get({
             id: scoreboardId,
-            minTime: (new Date().getTime() / 1000) - ((parseInt(pastDays) || 7) * 60 * 60 * 24)
+            minTime: (new Date().getTime() / 1000) - (pastDaysParsed * 60 * 60 * 24),
         });
 
         // all-time stats
@@ -77,7 +75,7 @@ r.get('/:scoreboardId', (req, res) => {
                       FROM entries
                       WHERE scoreboard_id = @id`);
         const { allScoreCount, allScoreAverage } = statsAllStmt.get({
-            id: scoreboardId
+            id: scoreboardId,
         });
 
         // render results
@@ -86,29 +84,163 @@ r.get('/:scoreboardId', (req, res) => {
                 game: gameName,
                 scoreboard: scoreboardName,
                 setKey, getKey,
-                embedEnabled, embedTitle
+                embedEnabled, embedTitle,
+                pastDaysParsed, scoreNameFilter,
             },
             stats: {
                 timeScoreAverage, timeScoreCount,
-                allScoreAverage, allScoreCount
+                allScoreAverage, allScoreCount,
             },
             entries,
         });
     } else {
-        res.send('404 scoreboard not found');
+        res.render('404');
     }
 });
 
 // changes details about a scoreboard
 r.post('/:scoreboardId', (req, res) => {
     const { scoreboardId } = req.params;
-    const { newName, enableEmbed, resetApiKeys, clearEntries, deleteScore } = req.body;
+    const { newName, enableEmbed, embedTitle, resetApiKeys, clearEntries, deleteEntry } = req.body;
+
+    // check for scoreboard ownership
+    const stmt = req.database
+        .prepare(`SELECT s.name
+                  FROM scoreboards s
+                           INNER JOIN games g ON
+                      s.game_id = g.game_id
+                  WHERE scoreboard_id = @id
+                    AND g.owner_id = @owner`);
+    const result = stmt
+        .get({
+            id: scoreboardId,
+            owner: req.authentication.getUserId(),
+        });
+
+    if (result) {
+        // update scoreboard values
+        if (newName || embedTitle || enableEmbed) {
+            const stmt = req.database
+                .prepare(`UPDATE scoreboards
+                          SET name          = coalesce(@newName, name),
+                              embed_title   = coalesce(@embedTitle, embed_title),
+                              embed_enabled = coalesce(@enableEmbed, embed_enabled)
+                          WHERE scoreboard_id = @id`);
+            stmt.run({
+                newName,
+                embedTitle,
+                enableEmbed: enableEmbed ? 1 : 0,
+                id: scoreboardId,
+            });
+        }
+
+        // reset the get and set API keys
+        if (resetApiKeys) {
+            const stmt = req.database
+                .prepare(`UPDATE scoreboards
+                          SET get_key = @getKey,
+                              set_key = @setKey
+                          WHERE scoreboard_id = @id`);
+            stmt.run({
+                getKey: randomKey(16),
+                setKey: randomKey(16),
+                id: scoreboardId,
+            });
+        }
+
+        // reset the scoreboard entries (truncate it)
+        if (clearEntries) {
+            const stmt = req.database
+                .prepare(`DELETE
+                          FROM entries
+                          WHERE scoreboard_id = @id`);
+            stmt.run({
+                id: scoreboardId,
+            });
+        }
+
+        // delete a single score entry
+        if (deleteEntry) {
+            const stmt = req.database
+                .prepare(`DELETE
+                          FROM entries
+                          WHERE entry_id = @id`);
+            stmt.run({
+                id: parseInt(deleteEntry),
+            });
+        }
+
+        res.redirect('/scoreboard/' + scoreboardId);
+    } else {
+        res.render('404');
+    }
 });
 
 // removes a scoreboard from the database
 r.delete('/:scoreboardId', (req, res) => {
     const { scoreboardId } = req.params;
 
+    // check for scoreboard ownership
+    const stmt = req.database
+        .prepare(`SELECT g.game_id as gameId
+                  FROM scoreboards s
+                           INNER JOIN games g ON
+                      s.game_id = g.game_id
+                  WHERE scoreboard_id = @id
+                    AND g.owner_id = @owner`);
+    const result = stmt
+        .get({
+            id: scoreboardId,
+            owner: req.authentication.getUserId(),
+        });
+
+    if (result) {
+        const stmt = req.database
+            .prepare(`DELETE
+                      FROM scoreboards
+                      WHERE scoreboard_id = @id`);
+        stmt.run({
+            id: scoreboardId,
+        });
+
+        // redirect to game page, as this scoreboard does not exist anymore
+        res.redirect('/game/' + result.gameId);
+    } else {
+        res.render('404');
+    }
+});
+
+// delete a scoreboard
+r.delete('/:scoreboardId', (req, res) => {
+    const { scoreboardId } = req.params;
+
+    // check for scoreboard ownership
+    const stmt = req.database
+        .prepare(`SELECT s.game_id as gameId
+                  FROM scoreboards s
+                           INNER JOIN games g ON
+                      s.game_id = g.game_id
+                  WHERE scoreboard_id = @id
+                    AND g.owner_id = @owner`);
+    const result = stmt
+        .get({
+            id: scoreboardId,
+            owner: req.authentication.getUserId(),
+        });
+
+    if (result) {
+        const stmt = req.database
+            .prepare(`DELETE
+                      FROM scoreboards
+                      WHERE scoreboard_id = @id`);
+        stmt.run({
+            id: scoreboardId,
+        });
+
+        res.redirect('/game/' + result.gameId);
+    } else {
+        res.render('404');
+    }
 });
 
 module.exports = r;
