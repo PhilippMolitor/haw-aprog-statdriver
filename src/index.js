@@ -38,9 +38,9 @@ app.use(expressSession({
     saveUninitialized: false,
     cookie: {
         secure: config.isProduction,
-        sameSite: config.isProduction ? true : 'none'
+        sameSite: config.isProduction ? true : 'none',
     },
-    proxy: config.isProduction
+    proxy: config.isProduction,
 }));
 
 // add custom middlewares
