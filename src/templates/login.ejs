@@ -10,16 +10,20 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/login.css">
 </head>
 <body>
-    <div id="wrapperh">
+<div id="wrapperh">
     <div class="space"></div>
     <div id="rect">
         <div id="logo">StatDriver</div>
         <div id="information">StatDriver enables you to host your own Scoreboards.<br>
-         All you need is a StatDriver account.</div><br>
+            All you need is a StatDriver account.
+        </div>
+        <br>
         <form method="post">
-            <input class="ti foo" type="text" name="name" placeholder="name" pattern="[a-z][a-z0-9_.]{2,31}" value="<%= name %>" required><br>
+            <input class="ti foo" type="text" name="name" placeholder="name" pattern="[a-z][a-z0-9_.]{2,31}"
+                   value="<%= name %>" required><br>
             <input class="ti bar" type="password" name="password" placeholder="password" required><br>
             <input class="submitbutton" type="submit" value="login">
+            <input type="hidden" name="from" value="<%= from %>" />
 
             <p style="color: red; font-weight: 700;">
                 <% if (error == 1) { %>
@@ -31,6 +35,6 @@
         </form>
     </div>
     <div class="space"></div>
-    </div>
+</div>
 </body>
 </html>
