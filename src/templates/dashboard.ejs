@@ -25,7 +25,10 @@
                 <div class="img"><img width="70" src="/uploads/game-<%= g.id %>.jpg"></div>
                 <div id="text">
                     <a class="gamename" href="/game/<%= g.id %>"><%= g.name %></a>
-                    <div class="stats">ID: <%= g.id %> 4 scoreboards <br> 6089 entries during the past day</div>
+                    <div class="stats">
+                        <%= g.scoreboardCount %> scoreboards -
+                        <%= g.entryCount %> entries total
+                    </div>
                 </div>
             </div>
         <% } %>
