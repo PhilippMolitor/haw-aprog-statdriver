@@ -19,46 +19,30 @@
         <div id="information">StatDriver enables you to host your own Scoreboards.<br>
             All you need is a StatDriver account.
         </div>
+
         <br>
         <form method="post">
             <input class="ti user" type="text" name="name" placeholder="username" pattern="[a-z][a-z0-9_.]{2,31}"><br>
             <input class="ti mail" type="text" name="email" placeholder="email" pattern="[a-z][a-z0-9_.]{2,31}"><br>
             <input class="ti password" type="password" name="password" placeholder="password" required><br>
-            <input class="ti cpassword" type="password" name="confirmPassword" placeholder="confirm password" required><br>
+            <input class="ti cpassword" type="password" name="confirmPassword" placeholder="confirm password"
+                   required><br>
             <input class="submitbutton" type="submit" value="signup">
-            <input type="hidden" name="from"  />
+            <input type="hidden" name="from" />
 
-            <a id="back" href="/dashboard">back to login</a>
+            <a id="back" href="/auth/login">back to login</a>
 
-
+            <p style="color: red; font-weight: 700;">
+                <% if (error == 1) { %>
+                    Password and confirmation not matching!
+                <% } else if (error == 2) { %>
+                    Username or Email already taken by another account!
+                <% } %>
             </p>
         </form>
     </div>
     <div class="space"></div>
 </div>
-
-<!--
-<p>
-<form method="post">
-    Username (only lowercase, numbers, and _ .): <br>
-    <input type="text" name="name" pattern="[a-z][a-z0-9_.]{2,31}" required><br>
-    E-Mail: <br>
-    <input type="email" name="email"><br>
-    Password: <br>
-    <input type="password" name="password"><br>
-    Confirm password: <br>
-    <input type="password" name="passwordConfirm"><br>
-    <input type="submit" value="send">
-</form>
--->
-<p style="color: red; font-weight: 700;">
-<% if (error == 1) { %>
-    Password and confirmation not matching!
-<% } else if (error == 2) { %>
-    Username or Email already taken by another account!
-<% } %>
-</p>
-</p>
 
 </body>
 </html>
