@@ -50,6 +50,7 @@ app.use(authenticationMiddleware());
 // attach router
 app.use('/', router);
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/mockui', express.static(path.join(__dirname, 'mockui', 'build')));
 
 // run the server
 app.listen(config.port, () => {
