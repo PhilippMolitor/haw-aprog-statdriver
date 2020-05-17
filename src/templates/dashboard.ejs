@@ -24,7 +24,7 @@
             <div id="game">
                 <div class="img"><img width="70" src="/uploads/game-<%= g.id %>.jpg"></div>
                 <div id="text">
-                    <button class="gamename"><%= g.name %></button>
+                    <a class="gamename" href="/game/<%= g.id %>"><%= g.name %></a>
                     <div class="stats">ID: <%= g.id %> 4 scoreboards <br> 6089 entries during the past day</div>
                 </div>
             </div>
