@@ -1,5 +1,5 @@
 const r = require('express').Router();
-const { randomKey } = require("../tools");
+const { randomKey } = require('../tools');
 
 // shows a scoreboard
 r.get('/:scoreboardId', (req, res) => {
@@ -22,7 +22,7 @@ r.get('/:scoreboardId', (req, res) => {
     const result = stmt
         .get({
             id: scoreboardId,
-            owner: req.authentication.getUserId()
+            owner: req.authentication.getUserId(),
         });
 
     if (result) {
@@ -36,7 +36,7 @@ r.get('/:scoreboardId', (req, res) => {
                       WHERE game_id = @id`);
         const { gameName } = gameStmt
             .get({
-                id: gameId
+                id: gameId,
             });
 
         // entries
@@ -53,7 +53,7 @@ r.get('/:scoreboardId', (req, res) => {
         const entries = entryStmt.all({
             id: scoreboardId,
             max: parseInt(maxEntries) || 10,
-            scoreNameFilter: scoreNameFilter || ''
+            scoreNameFilter: scoreNameFilter || '',
         });
 
         // limited stats
@@ -65,7 +65,7 @@ r.get('/:scoreboardId', (req, res) => {
                         AND date > @minTime`);
         const { timeScoreCount, timeScoreAverage } = statsLimitedStmt.get({
             id: scoreboardId,
-            minTime: (new Date().getTime() / 1000) - (pastDaysParsed * 60 * 60 * 24)
+            minTime: (new Date().getTime() / 1000) - (pastDaysParsed * 60 * 60 * 24),
         });
 
         // all-time stats
@@ -75,7 +75,7 @@ r.get('/:scoreboardId', (req, res) => {
                       FROM entries
                       WHERE scoreboard_id = @id`);
         const { allScoreCount, allScoreAverage } = statsAllStmt.get({
-            id: scoreboardId
+            id: scoreboardId,
         });
 
         // render results
@@ -85,11 +85,11 @@ r.get('/:scoreboardId', (req, res) => {
                 scoreboard: scoreboardName,
                 setKey, getKey,
                 embedEnabled, embedTitle,
-                pastDaysParsed, scoreNameFilter
+                pastDaysParsed, scoreNameFilter,
             },
             stats: {
                 timeScoreAverage, timeScoreCount,
-                allScoreAverage, allScoreCount
+                allScoreAverage, allScoreCount,
             },
             entries,
         });
@@ -114,7 +114,7 @@ r.post('/:scoreboardId', (req, res) => {
     const result = stmt
         .get({
             id: scoreboardId,
-            owner: req.authentication.getUserId()
+            owner: req.authentication.getUserId(),
         });
 
     if (result) {
@@ -130,7 +130,7 @@ r.post('/:scoreboardId', (req, res) => {
                 newName,
                 embedTitle,
                 enableEmbed: enableEmbed ? 1 : 0,
-                id: scoreboardId
+                id: scoreboardId,
             });
         }
 
@@ -144,8 +144,8 @@ r.post('/:scoreboardId', (req, res) => {
             stmt.run({
                 getKey: randomKey(16),
                 setKey: randomKey(16),
-                id: scoreboardId
-            })
+                id: scoreboardId,
+            });
         }
 
         // reset the scoreboard entries (truncate it)
@@ -155,7 +155,7 @@ r.post('/:scoreboardId', (req, res) => {
                           FROM entries
                           WHERE scoreboard_id = @id`);
             stmt.run({
-                id: scoreboardId
+                id: scoreboardId,
             });
         }
 
@@ -166,7 +166,7 @@ r.post('/:scoreboardId', (req, res) => {
                           FROM entries
                           WHERE entry_id = @id`);
             stmt.run({
-                id: parseInt(deleteEntry)
+                id: parseInt(deleteEntry),
             });
         }
 
@@ -191,7 +191,7 @@ r.delete('/:scoreboardId', (req, res) => {
     const result = stmt
         .get({
             id: scoreboardId,
-            owner: req.authentication.getUserId()
+            owner: req.authentication.getUserId(),
         });
 
     if (result) {
@@ -200,11 +200,44 @@ r.delete('/:scoreboardId', (req, res) => {
                       FROM scoreboards
                       WHERE scoreboard_id = @id`);
         stmt.run({
-            id: scoreboardId
+            id: scoreboardId,
         });
 
         // redirect to game page, as this scoreboard does not exist anymore
-        res.redirect('/game/' + result.gameId)
+        res.redirect('/game/' + result.gameId);
+    } else {
+        res.render('404');
+    }
+});
+
+// delete a scoreboard
+r.delete('/:scoreboardId', (req, res) => {
+    const { scoreboardId } = req.params;
+
+    // check for scoreboard ownership
+    const stmt = req.database
+        .prepare(`SELECT s.game_id as gameId
+                  FROM scoreboards s
+                           INNER JOIN games g ON
+                      s.game_id = g.game_id
+                  WHERE scoreboard_id = @id
+                    AND g.owner_id = @owner`);
+    const result = stmt
+        .get({
+            id: scoreboardId,
+            owner: req.authentication.getUserId(),
+        });
+
+    if (result) {
+        const stmt = req.database
+            .prepare(`DELETE
+                      FROM scoreboards
+                      WHERE scoreboard_id = @id`);
+        stmt.run({
+            id: scoreboardId,
+        });
+
+        res.redirect('/game/' + result.gameId);
     } else {
         res.render('404');
     }
