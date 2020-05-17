@@ -5,33 +5,33 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Dashboard - StatDriver</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/dashboard.css">
 </head>
 <body>
-    <div id="top">
-        <div class="logo">StatDriver</div>
-        <div id="menu">
-            <a href= "document.location.href='/dashboard/new-game'" class="bmenu newgame"> new game </a>
-            <a href= "document.location.href='/auth/logout'" class="bmenu logout"> logout </a>
-        </div>
+<div id="top">
+    <div class="logo">StatDriver</div>
+    <div id="menu">
+        <a href="/dashboard/new-game" class="bmenu newgame">new game</a>
+        <a href="/auth/logout" class="bmenu logout">logout</a>
     </div>
-    <div id="wrapperh">
-        <div class="space"></div>
-            <div id="rect">
-            <% for(let g of games) { %>
-                <div id="game">
-                    <div class="img"><img width="70" src="/assets/img/<%= g.id %>.jpg"></div>
-                    <div id="text">
-                        <button class="gamename"> <%= g.name %> </button>
-                        <div class="stats"> ID: <%= g.id %> 4 scoreboards <br> 6089 entries during the past day </div>
-                    </div>
+</div>
+<div id="wrapperh">
+    <div class="space"></div>
+    <div id="rect">
+        <% for(let g of games) { %>
+            <div id="game">
+                <div class="img"><img width="70" src="/uploads/game-<%= g.id %>.jpg"></div>
+                <div id="text">
+                    <button class="gamename"><%= g.name %></button>
+                    <div class="stats">ID: <%= g.id %> 4 scoreboards <br> 6089 entries during the past day</div>
                 </div>
-                <% } %>
             </div>
-        <div class="space"></div>
+        <% } %>
     </div>
+    <div class="space"></div>
+</div>
 
 
 </body>
