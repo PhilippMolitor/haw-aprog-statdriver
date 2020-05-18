@@ -8,9 +8,11 @@ r.get('/', (req, res) => {
                          COUNT(DISTINCT s.scoreboard_id) AS scoreboardCount,
                          COUNT(DISTINCT e.entry_id)      AS entryCount
                   FROM games g
-                           JOIN scoreboards s ON g.game_id = s.game_id
-                           JOIN entries e ON s.scoreboard_id = e.scoreboard_id
-                  WHERE owner_id = @owner`);
+                           LEFT JOIN scoreboards s ON g.game_id = s.game_id
+                           LEFT OUTER JOIN entries e ON s.scoreboard_id = e.scoreboard_id
+                  WHERE owner_id = @owner
+                  GROUP BY g.name
+                  ORDER BY g.game_id ASC`);
     const result = stmt.all({
         owner: req.authentication.getUserId(),
     });
