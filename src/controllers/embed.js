@@ -9,39 +9,37 @@ r.get('/scoreboard/:scoreboardId', (req, res) => {
 
     // check if embed is enabled
     const stmt = req.database
-        .prepare(`SELECT embed_title
+        .prepare(`SELECT embed_title as embedTitle
                   FROM scoreboards
                   WHERE scoreboard_id = @id
                     AND embed_enabled = 1`);
     const result = stmt.get({
-        id: scoreboardId
+        id: scoreboardId,
     });
-    const title = result.embed_title;
 
     if (result) {
+        const { embedTitle } = result;
+
         // find scoreboard entries
         const stmt = req.database
-            .prepare(`SELECT *
-                      FROM 'entries'
+            .prepare(`SELECT player_name as name,
+                             score       as score,
+                             date        as time
+                      FROM entries
                       WHERE scoreboard_id = @id
                       ORDER BY score DESC
                       LIMIT @max`);
-        const result = stmt
+        const scores = stmt
             .all({
                 id: scoreboardId,
-                max: maxEntries
-            })
-            .map(entry => ({
-                name: entry.player_name,
-                score: entry.score,
-                time: entry.date
-            }));
+                max: maxEntries,
+            });
 
         res.render('embed', {
             theme,
-            title,
+            embedTitle,
             rank,
-            scores: result
+            scores,
         });
     } else {
         res
