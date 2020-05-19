@@ -5,12 +5,30 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/new-game.css">
     <title>New Game - StatDriver</title>
 </head>
 <body>
+
+<div id="top">
+    <div class="logo">StatDriver</div>
+    <div id="menu">
+        <a href="/profile" class="bmenu profile">profile</a>
+        <a href="/auth/logout" class="bmenu logout">logout</a>
+    </div>
+</div>
+<div id="wrapperh">
+    <div class="space"></div>
+    <div id="rect">
+        <input class="ti" type="text" name="gameName" placeholder="What's the name of the game?">
+        <input class="submitbutton" type="submit" value="create game">
+    </div>
+    <div class="space"></div>
+</div>
+
 <form method="post">
-    <input type="text" name="gameName">
-    <input type="submit" value="create game">
+
 </form>
 </body>
 </html>
