@@ -1,36 +1,49 @@
 const r = require('express').Router();
+const bcrypt = require('bcrypt');
 
 r.get('/', (req, res) => {
+    const stmt = req.database
+        .prepare(`SELECT name, email
+                  FROM users
+                  WHERE user_id = @id`);
 
+    const result = stmt.get({
+        id: req.authentication.getUserId()
+    });
 
-    res.render('profile');
+    res.render('profile', {details: result});
 });
 
-//change password
-r.post('/profile/password', (req, res) => {
-    const {password, new_password, new_passwordConfirm} = req.body;
+// change password get-route
+r.get('/change-password', (req, res) => {
+    res.render('change-password');
+});
 
-    if (new_password == new_passwordConfirm) {
-        // creating a new password
-        if (new_password !== password) {
+//change password post-route
+r.post('/change-password', (req, res) => {
+    const {password, newPassword, newPasswordConfirm} = req.body;
 
-            //TODO: delete old password
-
-            //TODO: insert new password
+    if (newPassword == newPasswordConfirm) {
+        // creating a new password ... if
+        if (newPassword !== password) {
+            //TODO: update new password
             const stmt = req.database
-                .prepare(`INSERT INTO users (password_hash)
-                          VALUES (@passwordHash)`);
-
-            // same password
+                .prepare(`UPDATE users
+                          SET password_hash = @newPassword
+                          WHERE user_id = @id`);
+            stmt.run({
+                newPassword: bcrypt.hashSync(newPassword, 12),
+                id: req.authentication.getUserId()
+            });
+            //redirect to profile-page
+            res.redirect('/profile');
         } else {
-            res.redirect('/profile/password?error=2');
+            // same password
+            res.redirect('/profile/change-password?error=2');
         }
-        ;
-
     } else {
-        res.redirect('/profile/password?error=1');
+        res.redirect('/profile/change-password?error=1');
     }
-    ;
 });
 
 module.exports = r;
