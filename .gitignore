@@ -2,6 +2,9 @@ node_modules/
 .env
 data/
 
+# local docker deployment
+docker-compose.yml
+
 # macOS
 .DS_Store
 .AppleDouble
