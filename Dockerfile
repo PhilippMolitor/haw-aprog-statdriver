@@ -5,6 +5,10 @@ COPY . /app
 
 RUN apk add --no-cache python make gcc g++ \
     && npm install \
+    && cd /app/src/mockui \
+    && npm install \
+    && npm run build \
+    && rm -rf /app/src/mockui/node_modules \
     && mkdir /data
 
 FROM node:13-alpine
