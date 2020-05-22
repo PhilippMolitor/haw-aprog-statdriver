@@ -41,11 +41,14 @@ body {
     border-radius: 5px;
     margin-right: auto;
     margin-left: auto;
-    height: 30px;
+    height: 25px;
     width: 19em;
     font-family: 'press_start_2pregular';
     font-size: 12pt;
     color: #E5E5E5;
     cursor: pointer;
     margin-top: 34px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 5px;
 }
