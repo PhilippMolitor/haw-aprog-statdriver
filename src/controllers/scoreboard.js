@@ -27,6 +27,7 @@ r.get('/:scoreboardId', (req, res) => {
 
     if (result) {
         const { scoreboardName, gameId, setKey, getKey, embedEnabled, embedTitle } = result;
+        const maxEntriesParsed = parseInt(maxEntries) || 10;
         const pastDaysParsed = parseInt(pastDays) || 7;
 
         // game name
@@ -52,7 +53,7 @@ r.get('/:scoreboardId', (req, res) => {
                       LIMIT @max`);
         const entries = entryStmt.all({
             id: scoreboardId,
-            max: parseInt(maxEntries) || 10,
+            max: maxEntriesParsed,
             scoreNameFilter: scoreNameFilter || '',
         });
 
@@ -78,6 +79,26 @@ r.get('/:scoreboardId', (req, res) => {
             id: scoreboardId,
         });
 
+        // per-day stats
+        let perDayStats = {};
+        for (let i = 0; i > 0 - pastDaysParsed; i--) {
+            console.log(i);
+            const stmt = req.database
+                .prepare(`SELECT COUNT(entry_id) AS dayCount,
+                                 AVG(score)      AS dayAverage
+                          FROM entries
+                          WHERE scoreboard_id = @id
+                            AND date > @minTime
+                            AND date <= @maxTime`);
+            const { dayCount, dayAverage } = stmt.get({
+                id: scoreboardId,
+                minTime: Math.floor(new Date() / 1000) + ((i - 1) * 86400),
+                maxTime: Math.floor(new Date() / 1000) + (i * 86400),
+            });
+
+            perDayStats[i] = { dayCount, dayAverage: dayAverage || 0 };
+        }
+
         // render results
         res.render('scoreboard', {
             details: {
@@ -85,11 +106,12 @@ r.get('/:scoreboardId', (req, res) => {
                 scoreboard: scoreboardName,
                 setKey, getKey,
                 embedEnabled, embedTitle,
-                pastDaysParsed, scoreNameFilter,
+                maxEntriesParsed, pastDaysParsed, scoreNameFilter,
             },
             stats: {
                 timeScoreAverage, timeScoreCount,
                 allScoreAverage, allScoreCount,
+                perDayStats,
             },
             entries,
         });
