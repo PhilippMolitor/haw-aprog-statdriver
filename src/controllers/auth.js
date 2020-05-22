@@ -11,16 +11,19 @@ r.get('/login', (req, res) => {
 r.post('/login', (req, res) => {
     const { name, password, from } = req.body;
 
-    const stmt = req.database.prepare(`SELECT user_id, password_hash
+    const stmt = req.database.prepare(`SELECT user_id       as userId,
+                                              password_hash AS passwordHash
                                        FROM 'users'
                                        WHERE name = @name`);
     const result = stmt.get({ name });
 
     if (result) {
+        const { userId, passwordHash } = result;
+        
         // user found
-        if (bcrypt.compareSync(password, result.password_hash)) {
+        if (bcrypt.compareSync(password, passwordHash)) {
             // password correct
-            req.authentication.setUserId(result.user_id);
+            req.authentication.setUserId(userId);
             res.redirect(from || '/dashboard');
         } else {
             // password incorrect
