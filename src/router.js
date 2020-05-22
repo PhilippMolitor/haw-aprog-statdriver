@@ -2,7 +2,7 @@ const r = require('express').Router();
 const cors = require('cors');
 
 // middleware for authentication
-const {requiresLogin} = require('./middlewares/authentication');
+const { requiresLogin } = require('./middlewares/authentication');
 
 // route controllers
 const authController = require('./controllers/auth');

@@ -14,7 +14,7 @@ r.get('/scoreboard/:scoreboardId', (req, res) => {
     const result = stmt
         .get({
             id: scoreboardId,
-            key: apiGetKey
+            key: apiGetKey,
         });
 
     if (result) {
@@ -28,18 +28,18 @@ r.get('/scoreboard/:scoreboardId', (req, res) => {
         const result = stmt
             .all({
                 id: scoreboardId,
-                max: maxTopEntries
+                max: maxTopEntries,
             })
             .map(entry => ({
                 name: entry.player_name,
                 score: entry.score,
-                time: entry.date
+                time: entry.date,
             }));
 
         res.send({
             status: true,
             message: '',
-            payload: result
+            payload: result,
         });
     } else {
         // scoreboard does not exist or get key is wrong
@@ -48,7 +48,7 @@ r.get('/scoreboard/:scoreboardId', (req, res) => {
             .send({
                 status: false,
                 message: 'scoreboard or get key wrong',
-                payload: []
+                payload: [],
             });
     }
 });
@@ -67,7 +67,7 @@ r.post('/scoreboard/:scoreboardId', (req, res) => {
     const result = stmt
         .get({
             id: scoreboardId,
-            key: apiSetKey
+            key: apiSetKey,
         });
 
     if (result) {
@@ -75,7 +75,7 @@ r.post('/scoreboard/:scoreboardId', (req, res) => {
                                            VALUES (@id, @name, @score)`);
         const result = stmt.run({
             id: scoreboardId,
-            name, score
+            name, score,
         });
 
         if (result.changes > 0) {
@@ -85,15 +85,15 @@ r.post('/scoreboard/:scoreboardId', (req, res) => {
                                                  AND score >= @score`);
             const result = stmt.get({
                 id: scoreboardId,
-                score
+                score,
             });
 
             res.send({
                 status: true,
                 message: 'entry submitted to scoreboard',
                 payload: {
-                    rank: result.count
-                }
+                    rank: result.count,
+                },
             });
         } else {
             res
@@ -101,8 +101,8 @@ r.post('/scoreboard/:scoreboardId', (req, res) => {
                 .send({
                     status: false,
                     message: 'invalid player name or score value',
-                    payload: []
-                })
+                    payload: [],
+                });
         }
     } else {
         // scoreboard does not exist or get key is wrong
@@ -111,7 +111,7 @@ r.post('/scoreboard/:scoreboardId', (req, res) => {
             .send({
                 status: false,
                 message: 'scoreboard or set key wrong',
-                payload: []
+                payload: [],
             });
     }
 

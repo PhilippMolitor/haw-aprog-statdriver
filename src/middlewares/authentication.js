@@ -5,7 +5,7 @@ function authenticationMiddleware () {
             setUserId: id => req.session.userId = id,
             getUserId: () => req.session.userId || null,
             logout: () => req.session.destroy(() => {
-            })
+            }),
         };
 
         next();
@@ -26,5 +26,5 @@ function requiresLogin () {
 
 module.exports = {
     authenticationMiddleware,
-    requiresLogin
+    requiresLogin,
 };

@@ -51,6 +51,7 @@ app.use(authenticationMiddleware());
 app.use('/', router);
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/mockui', express.static(path.join(__dirname, 'mockui', 'build')));
+app.use('*', (req, res) => res.render('404'));
 
 // run the server
 app.listen(config.port, () => {
