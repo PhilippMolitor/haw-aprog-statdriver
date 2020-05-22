@@ -19,7 +19,7 @@ r.post('/login', (req, res) => {
 
     if (result) {
         const { userId, passwordHash } = result;
-        
+
         // user found
         if (bcrypt.compareSync(password, passwordHash)) {
             // password correct

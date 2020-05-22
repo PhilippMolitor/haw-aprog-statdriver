@@ -49,7 +49,7 @@ r.post('/:gameId', (req, res) => {
             stmt.run({ gameId });
 
             res.redirect('/dashboard');
-            return;
+
         }
     }
 });
