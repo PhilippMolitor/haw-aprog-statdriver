@@ -1,0 +1,92 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: #1A203E;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#wrapperh {
+    display: flex;
+    width: 100%;
+}
+.space{
+    width: 10%;
+}
+
+#rect {
+    display: flex;
+    flex-direction: column;
+    background: #0D1333;
+    opacity: 0.8;
+    backdrop-filter: blur(40px);
+    position: relative;
+    border-radius: 6px;
+    width: 80%;
+    height: 550px;
+    overflow: scroll;
+}
+
+#top {
+    display: flex;
+}
+.logo {
+    font-family: 'press_start_2pregular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 50px;
+    color: #5AA8A3;
+    padding-left: 10%;
+    padding-bottom: 23px;
+}
+#menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0px;
+    margin-right: 10.5%;
+}
+.bmenu {
+    background-color: transparent;
+    text-align: left;
+    color: lightgrey;
+    font-family: Avenir;
+    font-size: 13pt;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.information {
+    color: lightgrey;
+    font-family: Avenir;
+    font-size: 20pt;
+    text-align: center;
+    text-decoration: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+.changepassword {
+    background: #5AA8A3;
+    border-color: #5AA8A3;
+    border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 15px;
+    height: 25px;
+    width: 15em;
+    font-family: 'press_start_2pregular';
+    font-size: 13pt;
+    color: #E5E5E5;
+    cursor: pointer;
+    text-decoration: none;
+    padding-top: 7px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
