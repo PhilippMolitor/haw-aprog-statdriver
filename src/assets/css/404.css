@@ -1,0 +1,51 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: #1A203E;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+.notfound {
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'press_start_2pregular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 50px;
+    color: #5AA8A3;
+}
+
+.text {
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'press_start_2pregular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 50px;
+    color: #E5E5E5;
+    text-align: center;
+}
+
+.button {
+    background: #5AA8A3;
+    border-color: #5AA8A3;
+    border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    height: 30px;
+    width: 19em;
+    font-family: 'press_start_2pregular';
+    font-size: 12pt;
+    color: #E5E5E5;
+    cursor: pointer;
+    margin-top: 34px;
+}
