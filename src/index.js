@@ -38,9 +38,9 @@ app.use(expressSession({
     saveUninitialized: false,
     cookie: {
         secure: config.isProduction,
-        sameSite: config.isProduction ? true : 'none'
+        sameSite: config.isProduction ? true : 'none',
     },
-    proxy: config.isProduction
+    proxy: config.isProduction,
 }));
 
 // add custom middlewares
@@ -50,6 +50,8 @@ app.use(authenticationMiddleware());
 // attach router
 app.use('/', router);
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/mockui', express.static(path.join(__dirname, 'mockui', 'build')));
+app.use('*', (req, res) => res.render('404'));
 
 // run the server
 app.listen(config.port, () => {

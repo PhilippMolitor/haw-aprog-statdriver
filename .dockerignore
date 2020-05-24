@@ -1,9 +1,7 @@
-node_modules/
-.env
+**/node_modules/
 data/
-
-# local docker deployment
-docker-compose.yml
+.idea/
+.env
 
 # macOS
 .DS_Store

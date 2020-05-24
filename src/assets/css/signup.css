@@ -25,11 +25,17 @@ body {
     font-family: Avenir;
     font-size: 13pt;
 }
-.foo {
-    margin-top: 30px;
+.user {
+    margin-top: 0px;
 }
-.bar {
-    margin-top: 70px;
+.mail {
+    margin-top: 25px;
+}
+.password {
+    margin-top: 50px;
+}
+.cpassword {
+    margin-top: 75px;
 }
 .submitbutton {
     background: #5AA8A3;
@@ -45,6 +51,19 @@ body {
     font-size: 17pt;
     color: #E5E5E5;
     cursor: pointer;
+}
+
+#back {
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: normal;
+    position: absolute;
+    right: 0px;
+    font-size: 15px;
+    color: #E5E5E5;
+    margin-top: 145px;
+    margin-right: 103px;
+    text-decoration: none;
 }
 
 #wrapperh {

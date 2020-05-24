@@ -10,7 +10,7 @@ const databaseFile = path.join(config.dataPath, 'statdriver.db');
 const database = betterSqlite3(databaseFile, {
     verbose: message => {
         if (!config.isProduction) console.debug('[debug] database query: ' + message);
-    }
+    },
 });
 
 // middleware factory
@@ -24,5 +24,5 @@ function databaseMiddleware () {
 // export necessary parts as module object
 module.exports = {
     database,
-    databaseMiddleware
+    databaseMiddleware,
 };

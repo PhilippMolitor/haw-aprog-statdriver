@@ -3,28 +3,28 @@ const bcrypt = require('bcrypt');
 
 // login page
 r.get('/login', (req, res) => {
-    const { name, error } = req.query;
-    res.render('login', {
-        name,
-        error
-    });
+    const { name, error, from } = req.query;
+    res.render('login', { name, error, from });
 });
 
 // login action handler
 r.post('/login', (req, res) => {
-    const {name, password} = req.body;
+    const { name, password, from } = req.body;
 
-    const stmt = req.database.prepare(`SELECT user_id, password_hash
+    const stmt = req.database.prepare(`SELECT user_id       as userId,
+                                              password_hash AS passwordHash
                                        FROM 'users'
                                        WHERE name = @name`);
     const result = stmt.get({ name });
 
     if (result) {
+        const { userId, passwordHash } = result;
+
         // user found
-        if (bcrypt.compareSync(password, result.password_hash)) {
+        if (bcrypt.compareSync(password, passwordHash)) {
             // password correct
-            req.authentication.setUserId(result.user_id);
-            res.redirect('/dashboard');
+            req.authentication.setUserId(userId);
+            res.redirect(from || '/dashboard');
         } else {
             // password incorrect
             res.redirect('/auth/login?error=1');
@@ -46,15 +46,15 @@ r.get('/logout', (req, res) => {
 
 // sign-up page
 r.get('/signup', (req, res) => {
-    const {error} = req.query;
+    const { error } = req.query;
     res.render('signup', {
-        error
+        error,
     });
 });
 
 // sign-up action handler
 r.post('/signup', (req, res) => {
-    const {name, password, passwordConfirm, email} = req.body;
+    const { name, password, passwordConfirm, email } = req.body;
 
     // check for password
     if (password !== passwordConfirm) {
@@ -66,8 +66,8 @@ r.post('/signup', (req, res) => {
             .prepare(`SELECT name
                       FROM users
                       WHERE name = @name
-                         OR email = @email`)
-        const result = stmt.get({name, email});
+                         OR email = @email`);
+        const result = stmt.get({ name, email });
 
         if (result) {
             // user or email exists, error
@@ -80,7 +80,7 @@ r.post('/signup', (req, res) => {
             stmt.run({
                 name,
                 passwordHash: bcrypt.hashSync(password, 12),
-                email
+                email,
             });
 
             // redirect to login

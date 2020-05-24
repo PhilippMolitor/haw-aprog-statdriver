@@ -1,0 +1,21 @@
+#fill {
+    background-color: #0D1333;
+}
+
+.header {
+    background-color: #1A203E;
+    color: #E5E5E5;
+}
+
+.subheader {
+    background-color: #0D1333;
+    color: #5AA8A3;
+}
+
+table.scores {
+    color: #E5E5E5;
+}
+
+table.scores thead tr {
+    border-bottom: 3px solid #5AA8A3;
+}

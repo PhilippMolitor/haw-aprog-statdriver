@@ -5,17 +5,89 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Scoreboard - StatDriver</title>
+    <title><%= details.game %>/<%= details.scoreboard %> - StatDriver</title>
 </head>
 <body>
+<h1>Game:
+    <%= details.game %>
+</h1>
+<h1>Scoreboard:
+    <%= details.scoreboard %>
+</h1>
+
+<h1>Settings</h1>
+<form method="post">
+    <h2>Change scoreboard name</h2>
+    <input type="text" name="newName" value="<%= details.scoreboard %>">
+    <h2>Change embed name</h2>
+    <input type="text" name="embedTitle" value="<%= details.embedTitle %>">
+    <h2>Enable/disable embed</h2>
+    <input type="checkbox" name="enableEmbed" <%= details.embedEnabled == 1 ? 'checked' : '' %> value="1">
+    <br>
+    <input type="submit" value="save changes">
+</form>
+
+<h1>Filter</h1>
+<form method="get">
+    <h2>Maximum Entries Displayed</h2>
+    <input type="number" name="maxEntries" value="<%= details.maxEntriesParsed %>">
+    <h2>Past Days Stats</h2>
+    <input type="number" name="pastDays" value="<%= details.pastDaysParsed %>">
+    <h2>Filter by name</h2>
+    <input type="text" name="scoreNameFilter" value="<%= details.scoreNameFilter %>">
+    <br>
+    <input type="submit" value="apply">
+</form>
+
+<h1 style="color: red;">Danger Zone</h1>
+<form method="post">
+    <h2>Reset API keys</h2>
+    <input type="submit" name="resetApiKeys" value="y tho">
+</form>
+<form method="post">
+    <h2>Clear score entries</h2>
+    <input type="submit" name="clearEntries" value="Kill 'em all!">
+</form>
+
+<h1>Scoreboard</h1>
+<table>
+    <thead>
+    <tr>
+        <td>rank</td>
+        <td>player</td>
+        <td>score</td>
+        <td>time of record</td>
+        <td>actions</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% let rank = 1; for (let e of entries) { %>
+        <tr>
+            <td><%= rank %></td>
+            <td><%= e.name %></td>
+            <td><%= e.score %></td>
+            <td><%= new Date(e.timestamp * 1000).toLocaleString('de-DE') %></td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="deleteEntry" value="<%= e.id %>">
+                    <input type="submit" value="x">
+                </form>
+            </td>
+        </tr>
+    <% rank++; } %>
+    </tbody>
+</table>
+
 <h1>details</h1>
 <pre>
 <%= JSON.stringify(details, null, 2) %>
 </pre>
+
 <h1>stats</h1>
 <pre>
 <%= JSON.stringify(stats, null, 2) %>
 </pre>
+
 <h1>entries</h1>
 <pre>
 <%= JSON.stringify(entries, null, 2) %>

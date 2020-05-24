@@ -1,0 +1,7 @@
+.scorebox {
+    box-sizing: border-box;
+
+    margin: 1rem;
+    padding: 1rem;
+    width: 100%;
+}

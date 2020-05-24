@@ -5,30 +5,44 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Scoreboard - StatDriver</title>
+    <title><%= embedTitle %> - StatDriver</title>
 
-    <style type="text/css">
-        * {
-        <% if(theme == 'light') { %> color: #000000;
-            background-color: #ffffff;
-        <% } else { %> color: #ffffff;
-            background-color: #000000;
-        <% } %>
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/embed.css">
+    <link rel="stylesheet" type="text/css"
+          href="/assets/css/embed.<% if(theme == 'light') { %>light<% } else { %>dark<% } %>.css">
 </head>
 <body>
-<h1><%= title %></h1>
-<% if(rank) { %>
-    <p>
-        Your rank is: <%= rank %>
-    </p>
-<% } %>
-<ol>
-    <% for (let entry of scores) { %>
-        <li><%= entry.name %> - <%= entry.score %> - <%= new Date(entry.time * 1000) %></li>
+<div id="fill">
+    <div class="header">
+        <%= embedTitle %>
+    </div>
+
+    <% if (rank) { %>
+        <div class="subheader">
+            You have reached rank #<%= rank %> !
+        </div>
     <% } %>
-</ol>
+
+    <table class="scores">
+        <thead>
+        <tr>
+            <td class="align-r">#</td>
+            <td class="align-l">Player</td>
+            <td class="align-r">Score</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% let i = 1; for (const e of scores) { %>
+            <tr>
+                <td class="align-r"><%= i %></td>
+                <td class="align-l"><%= e.name %></td>
+                <td class="align-r"><%= e.score %></td>
+            </tr>
+        <% i++; } %>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>
