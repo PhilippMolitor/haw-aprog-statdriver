@@ -116,11 +116,48 @@
                         <td class="align-r">rank</td>
                         <td class="align-l">player</td>
                         <td class="align-r">score</td>
-                        <td class="align-l>time of record</td>
-                        <td class="align-r>actions</td>
+                        <td class="align-l">time of record</td>
+                        <td class="align-l">actions</td>
                     </tr>
                     </thead>
                     <tbody>
+
+
+
+
+
+                    <tr>
+                                                <td class="align-r">42</td>
+                                                <td class="align-l">foo</td>
+                                                <td class="align-r">4793</td>
+                                                <td class="align-l">26.09.4000</td>
+                                                <td>
+                                                    <form method="post">
+                                                        <input type="hidden" name="deleteEntry" value="23">
+                                                        <input class="tbutton" type="submit" value="x">
+                                                    </form>
+                                                </td>
+                    </tr>
+                    <tr>
+                                                                    <td class="align-r">483</td>
+                                                                    <td class="align-l">barlongername</td>
+                                                                    <td class="align-r">724</td>
+                                                                    <td class="align-l">03.05.1839</td>
+                                                                    <td>
+                                                                        <form method="post">
+                                                                            <input type="hidden" name="deleteEntry" value="48">
+                                                                            <input class="tbutton" type="submit" value="x">
+                                                                        </form>
+                                                                    </td>
+                    </tr>
+
+
+
+
+
+
+
+
                     <% let rank = 1; for (let e of entries) { %>
                         <tr>
                             <td class="align-r"><%= rank %></td>
@@ -130,7 +167,7 @@
                             <td>
                                 <form method="post">
                                     <input type="hidden" name="deleteEntry" value="<%= e.id %>">
-                                    <input type="submit" value="x">
+                                    <input class="tbutton" type="submit" value="x">
                                 </form>
                             </td>
                         </tr>

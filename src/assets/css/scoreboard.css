@@ -300,7 +300,8 @@ table.scores {
 
     color: #E5E5E5;
     font-family: Avenir;
-    font-size: 9pt;
+    font-size: 15pt;
+    border: 1px solid #E5E5E5;
 }
 
 table.scores tbody:before {
@@ -324,4 +325,22 @@ table.scores tr td.align-l {
 
 table.scores tr td.align-r {
     text-align: right;
+    padding-right: 60px;
+}
+
+table.scores thead{
+    border-bottom: 1px solid #E5E5E5;
+}
+.tbutton{
+    background: #5AA8A3;
+    border-color: #5AA8A3;
+    border-radius: 5px;
+    height: 20px;
+    width: 3em;
+    font-family: 'press_start_2pregular';
+    font-size: 9pt;
+    color: #E5E5E5;
+    cursor: pointer;
+    padding-left: auto;
+    padding-right: auto;
 }
