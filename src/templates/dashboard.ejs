@@ -25,7 +25,7 @@
             <div id="game">
                 <div class="img"><img width="70" src="/assets/img/icon.png"></div>
                 <div id="text">
-                    <button class="gamename"> <%= g.name %> </button>
+                    <a href="/game/<%= g.id %>" class="gamename"> <%= g.name %> </a>
                     <div class="stats">
                         <%= g.scoreboardCount %> scoreboards -
                         <%= g.entryCount %> entries total
