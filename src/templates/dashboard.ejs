@@ -23,9 +23,9 @@
     <div id="rect">
         <% for(let g of games) { %>
             <div id="game">
-                <div class="img"><img width="70" src="/uploads/game-<%= g.id %>.jpg"></div>
+                <div class="img"><img width="70" src="/assets/img/icon.png"></div>
                 <div id="text">
-                    <a class="gamename" href="/game/<%= g.id %>"><%= g.name %></a>
+                    <a href="/game/<%= g.id %>" class="gamename"> <%= g.name %> </a>
                     <div class="stats">
                         <%= g.scoreboardCount %> scoreboards -
                         <%= g.entryCount %> entries total
@@ -39,7 +39,5 @@
     </div>
     <div class="space"></div>
 </div>
-
-
 </body>
 </html>
