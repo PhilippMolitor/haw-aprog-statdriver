@@ -119,6 +119,32 @@ html, body {
     height: 100%;
 }
 
+.singlestats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    margin: 2rem 0;
+}
+
+.singlestats .stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.singlestats .stat .value {
+    margin-bottom: 0.5rem;
+
+    color: #5AA8A3;
+    font-size: 3rem;
+}
+
+.singlestats .stat .subtitle {
+    color: #E5E5E5;
+    font-size: 0.8rem;
+}
+
 .main {
     display: flex;
     flex-direction: row;
