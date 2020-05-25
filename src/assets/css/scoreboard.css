@@ -194,21 +194,20 @@ body {
 }
 #threefilters{
     display: flex;
-    margin-right: 20px;
     text-align: left;
     color: #E5E5E5;
     font-family: Avenir;
     font-size: 9pt;
-    padding-left: 70px;
+    padding-left: 20px;
 }
 .filter{
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
     background: #0D1333;
     border-radius: 5px;
     border-color: #E5E5E5;
     height: 16px;
-    width: 20em;
+    width: 7em;
     color: lightgrey;
     font-family: Avenir;
     font-size: 9pt;
@@ -219,12 +218,14 @@ body {
     border-color: #5AA8A3;
     border-radius: 5px;
     height: 20px;
-    width: 14em;
+    width: 7.5em;
     font-family: 'press_start_2pregular';
     font-size: 9pt;
     color: #E5E5E5;
     cursor: pointer;
     margin-top: 16px;
+    margin-right: 8px;
+    margin-left: 10px;
 }
 
 
@@ -267,13 +268,18 @@ body {
     border-color: #5AA8A3;
     border-radius: 5px;
     height: 20px;
-    width: 14em;
     font-family: 'press_start_2pregular';
     font-size: 9pt;
     color: #E5E5E5;
     cursor: pointer;
     margin-top: 16px;
     margin-left: 30px;
+}
+.done{
+    width: 7.5em;
+}
+.dtwo{
+    width: 15.5em;
 }
 
 
@@ -290,6 +296,31 @@ body {
     padding-bottom: 10px;
 }
 
+
+#table{
+    display: flex;
+    flex-direction: column;
+}
+#boxes{
+    display: flex;
+    flex-direction: column;
+}
+.box{
+    border: 1.5px solid #E5E5E5;
+    border-radius: 5px;
+    height: 210px;
+    width: 210px;
+    background: transparent;
+    position: absolute;
+    right: 0px;
+}
+.bone{
+    margin-right: 70px;
+}
+.btwo{
+    margin-right: 280px;
+}
+
 table.scores {
     box-sizing: border-box;
 
@@ -302,6 +333,13 @@ table.scores {
     font-family: Avenir;
     font-size: 15pt;
     border: 1px solid #E5E5E5;
+
+    position: absolute;
+    left: 15px;
+    margin-top: 60px;
+
+    border-radius: 5px;
+    border-collapse: separate;
 }
 
 table.scores tbody:before {
@@ -330,6 +368,7 @@ table.scores tr td.align-r {
 
 table.scores thead{
     border-bottom: 1px solid #E5E5E5;
+    font-weight: bolder;
 }
 .tbutton{
     background: #5AA8A3;

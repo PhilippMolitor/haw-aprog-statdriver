@@ -33,7 +33,7 @@
                 </div>
 
                 <div id="onemenu">
-                    <a href="/" class="onemenu all">other scoreboards</a>
+                    <a href="/game/ <!--TODO--> " class="onemenu all">all scoreboards</a>
                     <a href="/new-scoreboard" class="onemenu new">new scoreboard</a>
                 </div>
             </div>
@@ -77,6 +77,8 @@
 
                 <form method="get">
                 <div id="threefilters">
+                    <h2>Maximum Entries Displayed</h2>
+                    <input class="filter" type="number" name="maxEntries" value="<%= details.maxEntriesParsed %>">
                     <h2>Past Days Stats</h2>
                     <input class="filter" type="number" name="pastDays" value="<%= details.pastDaysParsed %>">
                     <h2>Filter by name</h2>
@@ -95,20 +97,21 @@
                 <form method="post">
                 <div id="four1">
                     <h2>Reset API keys</h2>
-                    <input class="dangerbutton" type="submit" name="resetApiKeys" value="y tho">
+                    <input class="dangerbutton done" type="submit" name="resetApiKeys" value="y tho">
                 </div>
                 </form>
 
                 <form method="post">
                 <div id="four2">
                     <h2>Clear score entries</h2>
-                    <input class="dangerbutton" type="submit" name="clearEntries" value="Kill 'em all!">
+                    <input class="dangerbutton dtwo" type="submit" name="clearEntries" value="Kill 'em all!">
                 </div>
                 </form>
             </div>
 
 
 
+              <div id="table">
                 <div class="fivetitle"><h1>Scoreboard:</h1></div>
                 <table class="scores">
                     <thead>
@@ -138,22 +141,6 @@
                                                     </form>
                                                 </td>
                     </tr>
-                    <tr>
-                                                                    <td class="align-r">483</td>
-                                                                    <td class="align-l">barlongername</td>
-                                                                    <td class="align-r">724</td>
-                                                                    <td class="align-l">03.05.1839</td>
-                                                                    <td>
-                                                                        <form method="post">
-                                                                            <input type="hidden" name="deleteEntry" value="48">
-                                                                            <input class="tbutton" type="submit" value="x">
-                                                                        </form>
-                                                                    </td>
-                    </tr>
-
-
-
-
 
 
 
@@ -174,21 +161,11 @@
                     <% rank++; } %>
                     </tbody>
                 </table>
-
-                <h1>details</h1>
-                <pre>
-                <%= JSON.stringify(details, null, 2) %>
-                </pre>
-
-                <h1>stats</h1>
-                <pre>
-                <%= JSON.stringify(stats, null, 2) %>
-                </pre>
-
-                <h1>entries</h1>
-                <pre>
-                <%= JSON.stringify(entries, null, 2) %>
-                </pre>
+                <div id="boxes">
+                    <rect class="box bone">
+                    <rect class="box btwo">
+                </div>
+              </div>
 
 
      </div>
