@@ -1,0 +1,121 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: #1A203E;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#wrapperh {
+    display: flex;
+    width: 100%;
+}
+.space{
+    width: 10%;
+}
+
+#rect {
+    display: flex;
+    flex-direction: column;
+    background: #0D1333;
+    opacity: 0.8;
+    backdrop-filter: blur(40px);
+    position: relative;
+    border-radius: 6px;
+    width: 80%;
+    height: 550px;
+    overflow: scroll;
+}
+
+#top {
+    display: flex;
+}
+.logo {
+    font-family: 'press_start_2pregular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 50px;
+    color: #5AA8A3;
+    padding-left: 10%;
+    padding-bottom: 25px;
+}
+#menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0px;
+    margin-right: 10.5%;
+}
+.bmenu {
+    background-color: transparent;
+    text-align: left;
+    color: lightgrey;
+    font-family: Avenir;
+    font-size: 13pt;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#link{
+    margin-top: 15px;
+    margin-left: 40px;
+    background: #5AA8A3;
+    border-color: #5AA8A3;
+    border-radius: 5px;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 4px;
+    height: 20px;
+    width: 21.5em;
+    font-family: 'press_start_2pregular';
+    font-size: 10pt;
+}
+.link{
+    color: #E5E5E5;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+ul{
+    text-align: left;
+    font-family: Avenir;
+    font-size: 13pt;
+    cursor: pointer;
+    font-size: 15pt;
+    margin-top: 30px;
+    list-style: none;
+}
+ul li::before{
+    content: "\2022";
+    color: #E5E5E5;
+    display: inline-block;
+    width: 1em;
+}
+.gamename{
+    color: #E5E5E5;
+    text-decoration: none;
+    line-height: 35px;
+}
+.delete{
+    color: #E5E5E5;
+    cursor: pointer;
+    text-decoration: none;
+    height: 20px;
+    width: 8em;
+    background: #5AA8A3;
+    border-color: #5AA8A3;
+    border-radius: 5px;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1px;
+    padding-bottom: 4px;
+    font-family: 'press_start_2pregular';
+    font-size: 10pt;
+    margin-left: 20px;
+}
