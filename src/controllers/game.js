@@ -17,10 +17,41 @@ r.get('/:gameId', (req, res) => {
         owner: req.authentication.getUserId(),
     });
 
-    res.render('game', {
+    if (result) {
+        res.render('game', {
+            gameId,
+            scoreboards: result,
+        });
+    } else {
+        res.render('404');
+    }
+});
+
+r.post('/:gameId', (req, res) => {
+    const { gameId } = req.params;
+    const { deleteGame } = req.body;
+
+    const stmt = req.database
+        .prepare(`SELECT name
+                  FROM games
+                  WHERE game_id = @gameId`);
+    const result = stmt.get({
         gameId,
-        scoreboards: result,
+        owner: req.authentication.getUserId(),
     });
+
+    if (result) {
+        if (deleteGame) {
+            const stmt = req.database
+                .prepare(`DELETE
+                          FROM games
+                          WHERE game_id = @gameId`);
+            stmt.run({ gameId });
+
+            res.redirect('/dashboard');
+
+        }
+    }
 });
 
 r.get('/:gameId/new-scoreboard', (req, res) => {

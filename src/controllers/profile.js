@@ -8,22 +8,22 @@ r.get('/', (req, res) => {
                   WHERE user_id = @id`);
 
     const result = stmt.get({
-        id: req.authentication.getUserId()
+        id: req.authentication.getUserId(),
     });
 
-    res.render('profile', {details: result});
+    res.render('profile', { details: result });
 });
 
 // change password get-route
 r.get('/change-password', (req, res) => {
-    const {error} = req.query;
+    const { error } = req.query;
 
-    res.render('change-password', {error});
+    res.render('change-password', { error });
 });
 
 //change password post-route
 r.post('/change-password', (req, res) => {
-    const {password, newPassword, newPasswordConfirm} = req.body;
+    const { password, newPassword, newPasswordConfirm } = req.body;
 
     const stmt = req.database
         .prepare(`SELECT password_hash AS passwordHash
@@ -31,12 +31,12 @@ r.post('/change-password', (req, res) => {
                   WHERE user_id = @id`);
 
     const result = stmt.get({
-        id: req.authentication.getUserId()
+        id: req.authentication.getUserId(),
     });
 
 
     if (!bcrypt.compareSync(password, result.passwordHash)) {
-        res.redirect('/profile/change-password?error=1')
+        res.redirect('/profile/change-password?error=1');
     } else {
         if (newPassword === newPasswordConfirm) {
             // creating a new password ... if
@@ -47,7 +47,7 @@ r.post('/change-password', (req, res) => {
                               WHERE user_id = @id`);
                 stmt.run({
                     newPassword: bcrypt.hashSync(newPassword, 12),
-                    id: req.authentication.getUserId()
+                    id: req.authentication.getUserId(),
                 });
                 //redirect to profile-page
                 res.redirect('/profile');

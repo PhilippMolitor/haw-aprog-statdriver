@@ -20,5 +20,5 @@ function checkDatabasePresent () {
 
 module.exports = {
     runDatabaseSeeder,
-    checkDatabasePresent
+    checkDatabasePresent,
 };

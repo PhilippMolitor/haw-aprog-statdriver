@@ -2,12 +2,32 @@
 <html>
 <head>
     <title>Profile - StatDriver</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/profile.css">
 </head>
 <body>
-<p>
-    Name: <%= details.name %><br>
-    E-Mail: <%= details.email %>
-</p>
-<a href="/profile/change-password">change password</a>
+<div id="top">
+    <div class="logo">StatDriver</div>
+    <div id="menu">
+        <a href="/profile" class="bmenu profile">profile</a>
+        <a href="/auth/logout" class="bmenu logout">logout</a>
+        <a href="/dashboard" class="bmenu dashboard">dashboard</a>
+    </div>
+</div>
+<div id="wrapperh">
+
+    <div class="space"></div>
+
+    <div id="rect">
+    <p class="information">
+        Name: <%= details.name %><br>
+        E-Mail: <%= details.email %>
+    </p>
+    <a class="changepassword" href="/profile/change-password">change password</a>
+    </div>
+
+    <div class="space"></div>
+
+</div>
 </body>
 </html>
