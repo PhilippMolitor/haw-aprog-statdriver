@@ -8,6 +8,56 @@
     <title><%= details.game %>/<%= details.scoreboard %> - StatDriver</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/scoreboard.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/Chart.min.css">
+    <script type="text/javscript" src="/assets/js/Chart.bundle.min.js"></script>
+    <script type="text/javascript">
+        var ctxCount = document.getElementById("chart-count").getContext('2d');
+        var ctxAvg = document.getElementById("chart-average").getContext('2d');
+
+        var data = {};
+
+        var parsedData = Object
+            .entries(data)
+            .map(([x, y]) => (
+                {
+                    t: new Date(new Date().getTime() + ((parseInt(x) * 86400) * 1000)),
+                    y
+                }
+            ))
+            .sort((a, b) => a.t - b.t);
+
+        new Chart(ctxCount, {
+            type: 'bar',
+            data: {
+                labels: parsedData.map(({ t }) => t),
+                datasets: [{
+                    label: 'Entries per day',
+                    data: parsedData.map(({ y }) => y.dayCount),
+                    backgroundColor: "rgba(255,0,0,1)"
+                }, {
+                    label: 'Average score per day',
+                    data: parsedData.map(({ y }) => y.dayCount),
+                    backgroundColor: "rgba(0,0,255,1)"
+                }]
+            }
+        });
+        new Chart(ctxAvg, {
+            type: 'bar',
+            data: {
+                labels: parsedData.map(({ t }) => t),
+                datasets: [{
+                    label: 'Entries per day',
+                    data: parsedData.map(({ y }) => y.dayAverage),
+                    backgroundColor: "rgba(255,0,0,1)"
+                }, {
+                    label: 'Average score per day',
+                    data: parsedData.map(({ y }) => y.dayAverage),
+                    backgroundColor: "rgba(0,0,255,1)"
+                }]
+            }
+        });
+
+    </script>
 </head>
 <body>
 <div id="top">
