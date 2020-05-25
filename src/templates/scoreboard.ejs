@@ -22,60 +22,61 @@
 <div id="wrapperh">
     <div class="space"></div>
     <div id="rect">
-            <div id="one">
-                <div class="oneinf">
+        <div id="one">
+            <div class="oneinf">
                 <h1>Game:
                     <%= details.game %>
                 </h1>
                 <h1>Scoreboard:
                     <%= details.scoreboard %>
                 </h1>
-                </div>
-
-                <div id="onemenu">
-                    <a href="/game/ <!--TODO--> " class="onemenu all">all scoreboards</a>
-                    <a href="/new-scoreboard" class="onemenu new">new scoreboard</a>
-                </div>
             </div>
 
-            <div id="two">
-                <div class="twotitle">
+            <div id="onemenu">
+                <a href="/game/ <!--TODO--> " class="onemenu all">all scoreboards</a>
+                <a href="/new-scoreboard" class="onemenu new">new scoreboard</a>
+            </div>
+        </div>
+
+        <div id="two">
+            <div class="twotitle">
                 <h1>Settings:</h1>
-                </div>
-                <form method="post">
+            </div>
+            <form method="post">
 
                 <div id="twochanges">
 
                     <div id="twochanges1">
-                    <h2>Change scoreboard name</h2>
-                    <input class="twoti" type="text" name="newName" value="<%= details.scoreboard %>">
+                        <h2>Change scoreboard name</h2>
+                        <input class="twoti" type="text" name="newName" value="<%= details.scoreboard %>">
                     </div>
 
                     <div id="twochanges2">
-                    <h2>Change embed name</h2>
-                    <input class="twoti" type="text" name="embedTitle" value="<%= details.embedTitle %>">
+                        <h2>Change embed name</h2>
+                        <input class="twoti" type="text" name="embedTitle" value="<%= details.embedTitle %>">
                     </div>
 
                     <div id="twochanges3">
-                    <h2>Enable/disable embed</h2>
-                    <input type="checkbox" name="enableEmbed" <%= details.embedEnabled == 1 ? 'checked' : '' %> value="1">
+                        <h2>Enable/disable embed</h2>
+                        <input type="checkbox" name="enableEmbed" <%= details.embedEnabled == 1 ? 'checked' : '' %>
+                               value="1">
                     </div>
 
                     <div id="twochanges4">
-                    <input class="savebutton" type="submit" value="save changes">
+                        <input class="savebutton" type="submit" value="save changes">
                     </div>
 
                 </div>
-                </form>
+            </form>
 
+        </div>
+
+        <div id="three">
+            <div class="threetitle">
+                <h1>Filter:</h1>
             </div>
 
-            <div id="three">
-                <div class="threetitle">
-                <h1>Filter:</h1>
-                </div>
-
-                <form method="get">
+            <form method="get">
                 <div id="threefilters">
                     <h2>Maximum Entries Displayed</h2>
                     <input class="filter" type="number" name="maxEntries" value="<%= details.maxEntriesParsed %>">
@@ -86,71 +87,69 @@
                     <br>
                     <input class="apply" type="submit" value="apply">
                 </div>
-                </form>
-            </div>
+            </form>
+        </div>
 
 
-            <div id="four">
+        <div id="four">
 
-                <div class="fourtitle"><h1 style="color: red;">Danger Zone:</h1> </div>
+            <div class="fourtitle"><h1 style="color: red;">Danger Zone:</h1></div>
 
-                <form method="post">
+            <form method="post">
                 <div id="four1">
                     <h2>Reset API keys</h2>
                     <input class="dangerbutton done" type="submit" name="resetApiKeys" value="y tho">
                 </div>
-                </form>
+            </form>
 
-                <form method="post">
+            <form method="post">
                 <div id="four2">
                     <h2>Clear score entries</h2>
                     <input class="dangerbutton dtwo" type="submit" name="clearEntries" value="Kill 'em all!">
                 </div>
-                </form>
-            </div>
+            </form>
+        </div>
 
 
+        <div id="table">
+            <div class="fivetitle"><h1>Scoreboard:</h1></div>
+            <table class="scores">
+                <thead>
+                <tr>
+                    <td class="align-r">rank</td>
+                    <td class="align-l">player</td>
+                    <td class="align-r">score</td>
+                    <td class="align-l">time of record</td>
+                    <td class="align-l">actions</td>
+                </tr>
+                </thead>
+                <tbody>
 
-              <div id="table">
-                <div class="fivetitle"><h1>Scoreboard:</h1></div>
-                <table class="scores">
-                    <thead>
+                <% let rank = 1; for (let e of entries) { %>
                     <tr>
-                        <td class="align-r">rank</td>
-                        <td class="align-l">player</td>
-                        <td class="align-r">score</td>
-                        <td class="align-l">time of record</td>
-                        <td class="align-l">actions</td>
+                        <td class="align-r"><%= rank %></td>
+                        <td class="align-l"><%= e.name %></td>
+                        <td class="align-r"><%= e.score %></td>
+                        <td class="align-l"><%= new Date(e.timestamp * 1000).toLocaleString('de-DE') %></td>
+                        <td>
+                            <form method="post">
+                                <input type="hidden" name="deleteEntry" value="<%= e.id %>">
+                                <input class="tbutton" type="submit" value="x">
+                            </form>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    
-                    <% let rank = 1; for (let e of entries) { %>
-                        <tr>
-                            <td class="align-r"><%= rank %></td>
-                            <td class="align-l"><%= e.name %></td>
-                            <td class="align-r"><%= e.score %></td>
-                            <td class="align-l"><%= new Date(e.timestamp * 1000).toLocaleString('de-DE') %></td>
-                            <td>
-                                <form method="post">
-                                    <input type="hidden" name="deleteEntry" value="<%= e.id %>">
-                                    <input class="tbutton" type="submit" value="x">
-                                </form>
-                            </td>
-                        </tr>
-                    <% rank++; } %>
-                    </tbody>
-                </table>
-                <div id="boxes">
-                    <rect class="box bone">
-                    <rect class="box btwo">
-                </div>
-              </div>
+                <% rank++; } %>
+                </tbody>
+            </table>
 
-
-     </div>
-        <div class="space"></div>
+            <div id="boxes">
+                <div class="box bone"></div>
+                <div class="box btwo"></div>
+            </div>
+        </div>
     </div>
+    <div class="space"></div>
+</div>
 
 </body>
 </html>
