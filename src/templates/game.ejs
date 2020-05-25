@@ -5,20 +5,43 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/game.css">
     <title>Game - StatDriver</title>
 </head>
 <body>
 <ul>
-    <a href="/game/<%= gameId %>/new-scoreboard">create new scoreboard</a>
+<div id="top">
+    <div class="logo">StatDriver</div>
+    <div id="menu">
+        <a href="/profile" class="bmenu profile">profile</a>
+        <a href="/dashboard/new-game" class="bmenu newgame">new game</a>
+        <a href="/auth/logout" class="bmenu logout">logout</a>
+    </div>
+</div>
+<div id="wrapperh">
+    <div class="space"></div>
+    <div id="rect">
 
+    <ul>
     <% for(s of scoreboards) { %>
-        <li>
-            <a href="/scoreboard/<%= s.scoreboardId %>"><%= s.name %></a>
             <form method="post" action="/scoreboard/<%= s.scoreboardId %>">
-                <input type="submit" name="deleteScoreboard" value="delete">
+            <li>
+                <a class="gamename" href="/scoreboard/<%= s.scoreboardId %>"><%= s.name %></a>
+                    <input class="delete" type="submit" name="deleteScoreboard" value="delete">
+            </li>
             </form>
-        </li>
-    <% } %>
+        <% } %>
+        </ul>
+
+
+    <div id="link">
+    <a class="link" href="/game/<%= gameId %>/new-scoreboard">create new scoreboard</a>
+    </div>
+
+</div>
+    <div class="space"></div>
+</div>
 </ul>
 </body>
 </html>
