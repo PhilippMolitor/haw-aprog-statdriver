@@ -96,7 +96,7 @@ r.get('/:scoreboardId', (req, res) => {
                 maxTime: Math.floor(new Date() / 1000) + (i * 86400),
             });
 
-            perDayStats[i] = { dayCount, dayAverage: dayAverage || 0 };
+            perDayStats[i] = { dayCount, dayAverage: Math.ceil(dayAverage) || 0 };
         }
 
         // render results
@@ -109,8 +109,8 @@ r.get('/:scoreboardId', (req, res) => {
                 maxEntriesParsed, pastDaysParsed, scoreNameFilter,
             },
             stats: {
-                timeScoreAverage, timeScoreCount,
-                allScoreAverage, allScoreCount,
+                timeScoreAverage: Math.ceil(timeScoreAverage), timeScoreCount,
+                allScoreAverage: Math.ceil(allScoreAverage), allScoreCount,
                 perDayStats,
             },
             entries,

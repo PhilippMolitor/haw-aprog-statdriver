@@ -107,6 +107,25 @@
             </div>
         </div>
 
+        <div class="singlestats">
+            <div class="stat">
+                <div class="value"><%= stats.allScoreAverage %></div>
+                <div class="subtitle">Avg. Score</div>
+            </div>
+            <div class="stat">
+                <div class="value"><%= stats.timeScoreAverage %></div>
+                <div class="subtitle">Avg. Score / <%= details.pastDaysParsed %> days</div>
+            </div>
+            <div class="stat">
+                <div class="value"><%= stats.allScoreCount %></div>
+                <div class="subtitle">Total Records</div>
+            </div>
+            <div class="stat">
+                <div class="value"><%= stats.timeScoreCount %></div>
+                <div class="subtitle">Total Records / <%= details.pastDaysParsed %> days</div>
+            </div>
+        </div>
+
         <div class="main">
             <div class="scoreboard">
                 <table class="scores">
