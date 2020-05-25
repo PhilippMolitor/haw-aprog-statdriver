@@ -52,7 +52,7 @@ r.get('/:scoreboardId', (req, res) => {
                       LIMIT @max`);
         const entries = entryStmt.all({
             id: scoreboardId,
-            max: parseInt(maxEntries) || 10,
+            max: parseInt(maxEntries) || 25,
             scoreNameFilter: scoreNameFilter || '',
         });
 
