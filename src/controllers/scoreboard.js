@@ -81,7 +81,7 @@ r.get('/:scoreboardId', (req, res) => {
         // render results
         res.render('scoreboard', {
             details: {
-                game: gameName,
+                game: gameName, gameId,
                 scoreboard: scoreboardName,
                 setKey, getKey,
                 embedEnabled, embedTitle,
