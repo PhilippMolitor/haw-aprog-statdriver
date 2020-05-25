@@ -104,13 +104,14 @@ html, body {
     flex-direction: row;
     justify-content: space-between;
 
-    margin-top: 1rem;
+    margin-top: 2rem;
     height: 300px;
 }
 
 .graphs > .graph-container {
     flex-grow: 1;
     padding: 0.4em;
+    width: 50%;
 }
 
 .graphs > .graph-container > canvas {
@@ -123,7 +124,7 @@ html, body {
     flex-direction: row;
     justify-content: space-between;
 
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 .main > .scoreboard {
@@ -185,6 +186,7 @@ input[type=submit] {
     border-radius: 5px;
     color: #E5E5E5;
     cursor: pointer;
+    padding: 0.3rem 0.5rem;
 }
 
 table.scores {

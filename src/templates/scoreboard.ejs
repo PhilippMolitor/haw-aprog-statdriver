@@ -9,54 +9,71 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/scoreboard.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/Chart.min.css">
-    <script type="text/javscript" src="/assets/js/Chart.bundle.min.js"></script>
-    <script type="text/javascript">
-        var ctxCount = document.getElementById("chart-count").getContext('2d');
-        var ctxAvg = document.getElementById("chart-average").getContext('2d');
+    <script type="text/javascript" src="/assets/js/Chart.bundle.min.js"></script>
+    <script type="text/javascript" async>
+        window.onload = function () {
+            var ctxCount = document.getElementById("graph-count").getContext('2d');
+            var ctxAvg = document.getElementById("graph-average").getContext('2d');
 
-        var data = {};
+            var data = <%- JSON.stringify(stats.perDayStats || {}) %>;
 
-        var parsedData = Object
-            .entries(data)
-            .map(([x, y]) => (
-                {
-                    t: new Date(new Date().getTime() + ((parseInt(x) * 86400) * 1000)),
-                    y
+            var parsedData = Object
+                .entries(data)
+                .map(([x, y]) => (
+                    {
+                        t: new Date(new Date().getTime() + ((parseInt(x) * 86400) * 1000)),
+                        y
+                    }
+                ))
+                .sort((a, b) => a.t - b.t);
+
+            new Chart(ctxCount, {
+                type: 'bar',
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            }
+                        }]
+                    }
+                },
+                data: {
+                    labels: parsedData.map(({ t }) => t),
+                    datasets: [{
+                        label: 'Entries per day',
+                        data: parsedData.map(({ y }) => y.dayCount),
+                        backgroundColor: "rgba(35,66,64,1)"
+                    }]
                 }
-            ))
-            .sort((a, b) => a.t - b.t);
-
-        new Chart(ctxCount, {
-            type: 'bar',
-            data: {
-                labels: parsedData.map(({ t }) => t),
-                datasets: [{
-                    label: 'Entries per day',
-                    data: parsedData.map(({ y }) => y.dayCount),
-                    backgroundColor: "rgba(255,0,0,1)"
-                }, {
-                    label: 'Average score per day',
-                    data: parsedData.map(({ y }) => y.dayCount),
-                    backgroundColor: "rgba(0,0,255,1)"
-                }]
-            }
-        });
-        new Chart(ctxAvg, {
-            type: 'bar',
-            data: {
-                labels: parsedData.map(({ t }) => t),
-                datasets: [{
-                    label: 'Entries per day',
-                    data: parsedData.map(({ y }) => y.dayAverage),
-                    backgroundColor: "rgba(255,0,0,1)"
-                }, {
-                    label: 'Average score per day',
-                    data: parsedData.map(({ y }) => y.dayAverage),
-                    backgroundColor: "rgba(0,0,255,1)"
-                }]
-            }
-        });
-
+            });
+            new Chart(ctxAvg, {
+                type: 'bar',
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            }
+                        }]
+                    }
+                },
+                data: {
+                    labels: parsedData.map(({ t }) => t),
+                    datasets: [{
+                        label: 'Daily score average',
+                        data: parsedData.map(({ y }) => y.dayAverage),
+                        backgroundColor: "rgba(35,66,64,1)"
+                    }]
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -77,7 +94,7 @@
             </div>
             <div class="nav">
                 <a href="/game/<%= details.gameId %>">back to game</a>
-                <a href="/game/<%= details.gameId %>">create new scoreboard</a>
+                <a href="/game/<%= details.gameId %>/new-scoreboard">create new scoreboard</a>
             </div>
         </div>
 
