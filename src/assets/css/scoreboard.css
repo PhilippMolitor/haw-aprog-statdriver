@@ -186,6 +186,7 @@ input[type=submit] {
     border-radius: 5px;
     color: #E5E5E5;
     cursor: pointer;
+    padding: 0.3rem 0.5rem;
 }
 
 table.scores {
