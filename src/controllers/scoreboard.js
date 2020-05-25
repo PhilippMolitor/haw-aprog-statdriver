@@ -27,7 +27,7 @@ r.get('/:scoreboardId', (req, res) => {
 
     if (result) {
         const { scoreboardName, gameId, setKey, getKey, embedEnabled, embedTitle } = result;
-        const maxEntriesParsed = parseInt(maxEntries) || 10;
+        const maxEntriesParsed = parseInt(maxEntries) || 25;
         const pastDaysParsed = parseInt(pastDays) || 7;
 
         // game name
@@ -102,7 +102,7 @@ r.get('/:scoreboardId', (req, res) => {
         // render results
         res.render('scoreboard', {
             details: {
-                game: gameName,
+                game: gameName, gameId,
                 scoreboard: scoreboardName,
                 setKey, getKey,
                 embedEnabled, embedTitle,

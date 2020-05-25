@@ -1,0 +1,228 @@
+:root, input {
+    font-family: 'press_start_2pregular';
+}
+
+body {
+    background: #1A203E;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+html, body {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+#top {
+    display: flex;
+    margin-top: 7vh;
+}
+
+.logo {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 50px;
+    color: #5AA8A3;
+    padding-left: 10%;
+    padding-bottom: 25px;
+}
+
+#menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0px;
+    margin-right: 10.5%;
+}
+
+.bmenu {
+    background-color: transparent;
+    text-align: left;
+    color: lightgrey;
+    font-family: Avenir;
+    font-size: 13pt;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.8em;
+    min-width: 900px;
+    width: 80vw;
+
+    box-sizing: border-box;
+    background-color: #0D1333;
+
+    border-radius: 5px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #E5E5E5;
+}
+
+.header > .title > a.game {
+    font-size: 1.2rem;
+    color: #E5E5E5;
+}
+
+.header > .title > span.scoreboard {
+    font-size: 1.8rem;
+    color: #5AA8A3;
+}
+
+.header > .nav {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+.header > .nav > a {
+    margin-top: auto;
+    margin-left: 1.4rem;
+    color: #E5E5E5;
+}
+
+.graphs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top: 1rem;
+    height: 300px;
+}
+
+.graphs > .graph-container {
+    flex-grow: 1;
+    padding: 0.4em;
+}
+
+.graphs > .graph-container > canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top: 1rem;
+}
+
+.main > .scoreboard {
+    box-sizing: border-box;
+    padding-right: 2rem;
+    width: 70%;
+}
+
+.main > .controls {
+    display: flex;
+    flex-direction: column;
+
+    width: 30%;
+}
+
+.control-segment {
+    width: 100%;
+    margin-bottom: 1.4rem;
+}
+
+.control-segment .title {
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    text-align: right;
+    color: #5AA8A3;
+}
+
+.control-segment .title.danger {
+    color: #f04533;
+}
+
+.control-segment .field {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.control-segment .field .label {
+    display: block;
+    margin-bottom: 0.4rem;
+
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+
+    color: #E5E5E5;
+}
+
+.control-segment .field .input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input[type=submit] {
+    margin-top: 0.8rem;
+    background-color: #5AA8A3;
+    border-color: #5AA8A3;
+    border-radius: 5px;
+    color: #E5E5E5;
+    cursor: pointer;
+}
+
+table.scores {
+    box-sizing: border-box;
+    width: 100%;
+
+    border-collapse: collapse;
+    color: #E5E5E5;
+    font-size: 10pt;
+}
+
+table.scores tbody:before {
+    content: "-";
+    display: block;
+    line-height: 0.6em;
+    color: transparent;
+}
+
+table.scores thead tr td {
+    font-weight: 700;
+}
+
+table.scores tbody tr td {
+    line-height: 1.3em;
+}
+
+table.scores tr td:nth-child(1) {
+    padding-right: 0.8rem;
+}
+
+table.scores tr td.align-l {
+    text-align: left;
+}
+
+table.scores tr td.align-r {
+    text-align: right;
+}
+
+table.scores thead {
+    border-bottom: 2px solid #5AA8A3;
+}
