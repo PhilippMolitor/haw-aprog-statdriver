@@ -9,9 +9,19 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/scoreboard.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/Chart.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="/assets/js/Chart.bundle.min.js"></script>
     <script type="text/javascript" async>
-        window.onload = function () {
+        $(document).ready(function () {
+            $("#input-api-url").val(document.location.protocol + "//" + document.location.host + "/api/scoreboard/<%- details.scoreboardId %>");
+
+            $("input.copy").click(function () {
+                this.focus();
+                this.setSelectionRange(0, this.value.length);
+                document.execCommand("copy");
+                alert("Copied to clipboard!")
+            });
+
             var ctxCount = document.getElementById("graph-count").getContext('2d');
             var ctxAvg = document.getElementById("graph-average").getContext('2d');
 
@@ -73,7 +83,7 @@
                     }]
                 }
             });
-        }
+        });
     </script>
 </head>
 <body>
@@ -209,6 +219,26 @@
                             <input class="input" type="submit" value="apply filters" />
                         </div>
                     </form>
+                </div>
+
+                <div class="control-segment">
+                    <h3 class="title">API Access</h3>
+                    <div class="field">
+                        <label class="label" for="input-api-url">HTTP Endpoint</label>
+                        <input class="input copy" id="input-api-url" type="text"
+                               value="http://<%= details.scoreboardId %>"
+                               readonly />
+                    </div>
+                    <div class="field">
+                        <label class="label" for="input-api-getkey">GET key</label>
+                        <input class="input copy" id="input-api-getkey" type="text" value="<%= details.getKey %>"
+                               readonly />
+                    </div>
+                    <div class="field">
+                        <label class="label" for="input-api-setkey">SET key</label>
+                        <input class="input copy" id="input-api-setkey" type="text" value="<%= details.setKey %>"
+                               readonly />
+                    </div>
                 </div>
 
                 <div class="control-segment">
