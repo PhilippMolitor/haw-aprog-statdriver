@@ -25,6 +25,8 @@
             <input class="submitbutton" type="submit" value="login">
             <input type="hidden" name="from" value="<%= from %>" />
 
+            <a class="signup" href="/auth/signup">No account yet? Sign up.</a>
+
             <p style="color: red; font-weight: 700;">
                 <% if (error == 1) { %>
                     Password incorrect!

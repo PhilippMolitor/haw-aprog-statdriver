@@ -25,12 +25,15 @@ body {
     font-family: Avenir;
     font-size: 13pt;
 }
+
 .foo {
     margin-top: 30px;
 }
+
 .bar {
     margin-top: 70px;
 }
+
 .submitbutton {
     background: #5AA8A3;
     border-color: #5AA8A3;
@@ -51,7 +54,8 @@ body {
     display: flex;
     width: 100%;
 }
-.space{
+
+.space {
     width: 10%;
 }
 
@@ -64,6 +68,7 @@ body {
     width: 80%;
     height: 550px;
 }
+
 #logo {
     font-family: 'press_start_2pregular';
     font-style: normal;
@@ -75,6 +80,7 @@ body {
     padding-left: 40px;
     padding-bottom: 30px;
 }
+
 #information {
     font-family: Avenir;
     font-style: normal;
@@ -84,4 +90,13 @@ body {
     color: #E5E5E5;
     padding-left: 40px;
     line-height: 35px;
+}
+
+a.signup {
+    position: absolute;
+    bottom: 130px;
+    right: 100px;
+    font-family: 'press_start_2pregular';
+    font-size: 0.7rem;
+    color: #E5E5E5;
 }
