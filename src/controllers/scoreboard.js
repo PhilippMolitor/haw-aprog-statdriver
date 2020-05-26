@@ -103,7 +103,7 @@ r.get('/:scoreboardId', (req, res) => {
         res.render('scoreboard', {
             details: {
                 game: gameName, gameId,
-                scoreboard: scoreboardName,
+                scoreboard: scoreboardName, scoreboardId,
                 setKey, getKey,
                 embedEnabled, embedTitle,
                 maxEntriesParsed, pastDaysParsed, scoreNameFilter,
