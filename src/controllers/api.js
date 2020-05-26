@@ -71,11 +71,12 @@ r.post('/scoreboard/:scoreboardId', (req, res) => {
         });
 
     if (result) {
-        const stmt = req.database.prepare(`INSERT INTO entries (scoreboard_id, player_name, score)
-                                           VALUES (@id, @name, @score)`);
+        const stmt = req.database.prepare(`INSERT INTO entries (scoreboard_id, player_name, score, date)
+                                           VALUES (@id, @name, @score, @date)`);
         const result = stmt.run({
             id: scoreboardId,
             name, score,
+            date: Math.round(Date.now() / 1000),
         });
 
         if (result.changes > 0) {
