@@ -184,10 +184,12 @@
                                    value="<%= details.embedTitle %>" />
                         </div>
                         <div class="field">
-                            <label class="label" for="input-embed-state">Enable/Disable Embed</label>
-                            <input class="input" id="input-embed-state" type="checkbox"
-                                   name="enableEmbed" <%= details.embedEnabled == 1 ? 'checked' : '' %>
-                                   value="1" />
+                            <label class="label" for="input-embed-state">Enable/Disable Embed
+                                <input class="input" id="input-embed-state" type="checkbox"
+                                       name="enableEmbed" <%= details.embedEnabled == 1 ? 'checked' : '' %>
+                                       value="1" />
+                                <span class="checkbox"></span>
+                            </label>
                         </div>
                         <div class="field">
                             <input class="input" type="submit" value="save settings">
