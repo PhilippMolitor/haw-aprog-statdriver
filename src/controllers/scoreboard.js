@@ -84,7 +84,6 @@ r.get('/:scoreboardId', (req, res) => {
         let today = new Date().setHours(0, 0, 0, 0) / 1000;
 
         for (let i = 0; i > 0 - pastDaysParsed; i--) {
-            console.log(i);
             const stmt = req.database
                 .prepare(`SELECT COUNT(entry_id) AS dayCount,
                                  AVG(score)      AS dayAverage
