@@ -81,6 +81,8 @@ r.get('/:scoreboardId', (req, res) => {
 
         // per-day stats
         let perDayStats = {};
+        let today = new Date().setHours(0, 0, 0, 0) / 1000;
+
         for (let i = 0; i > 0 - pastDaysParsed; i--) {
             console.log(i);
             const stmt = req.database
@@ -92,8 +94,8 @@ r.get('/:scoreboardId', (req, res) => {
                             AND date <= @maxTime`);
             const { dayCount, dayAverage } = stmt.get({
                 id: scoreboardId,
-                minTime: Math.floor(new Date() / 1000) + ((i - 1) * 86400),
-                maxTime: Math.floor(new Date() / 1000) + (i * 86400),
+                minTime: Math.floor(today + (i * 86400)),
+                maxTime: Math.floor(today + ((i + 1) * 86400)),
             });
 
             perDayStats[i] = { dayCount, dayAverage: Math.ceil(dayAverage) || 0 };

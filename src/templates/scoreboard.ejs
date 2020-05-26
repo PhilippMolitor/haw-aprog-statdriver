@@ -31,7 +31,7 @@
                 .entries(data)
                 .map(([x, y]) => (
                     {
-                        t: new Date(new Date().getTime() + ((parseInt(x) * 86400) * 1000)),
+                        t: new Date(new Date().setHours(0, 0, 0, 0) + ((parseInt(x) * 86400) * 1000)),
                         y
                     }
                 ))
